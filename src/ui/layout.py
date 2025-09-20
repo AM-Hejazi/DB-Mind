@@ -66,11 +66,42 @@ def create_ui():
             "<div style='margin-top: 12px;'>⏳ <i>Waiting for your request ...</i></div>"
             "</div>"
         )
+        # Override welcome message text for Maintenance Demo (SQLite)
+        welcome_message = (
+            "<div style='padding: 12px; border: 1px solid #333; border-radius: 12px; background-color: #1e1e1e; color: #f5f5f5; font-size: 14px;'>"
+            "<h3 style='margin-top: 0;'>💡 <b>Welcome / Willkommen</b></h3>"
+            "<div style='display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between;'>"
+            "<div style='flex: 1; min-width: 300px;'>"
+            "<h4 style='margin: 0;'>English</h4>"
+            "<p>This demo uses a read‑only maintenance SQLite database. Ask questions about equipment, sensors, work orders, failures, technicians, or plans. I will generate SQL over the demo database and show the results.</p>"
+            "<ul style='margin-top: 6px; padding-left: 20px;'>"
+            "<li><b>How to use it:</b></li>"
+            "<li>Ask a question in natural language</li>"
+            "<li>If needed, I clarify based on the schema</li>"
+            "<li>Then I show the generated SQL and a live result preview</li>"
+            "<li>Note: demo data only; top results previewed</li>"
+            "</ul>"
+            "</div>"
+            "<div style='flex: 1; min-width: 300px;'>"
+            "<h4 style='margin: 0;'>Deutsch</h4>"
+            "<p>Diese Demo nutzt eine schreibgeschützte Wartungs‑SQLite‑Datenbank. Stellen Sie Fragen zu Anlagen, Sensoren, Aufträgen, Störungen, Technikern oder Plänen. Ich generiere SQL über die Demo‑Datenbank und zeige die Ergebnisse.</p>"
+            "<ul style='margin-top: 6px; padding-left: 20px;'>"
+            "<li><b>So funktioniert es:</b></li>"
+            "<li>Stellen Sie eine Frage in natürlicher Sprache</li>"
+            "<li>Bei Bedarf kläre ich nach dem Schema</li>"
+            "<li>Danach zeige ich die SQL‑Abfrage und eine Ergebnisvorschau</li>"
+            "<li>Hinweis: Nur Demodaten; Top‑Ergebnisse werden angezeigt</li>"
+            "</ul>"
+            "</div>"
+            "</div>"
+            "<div style='margin-top: 12px;'>⏳ <i>Waiting for your request ...</i></div>"
+            "</div>"
+        )
 
         chatbot = gr.Chatbot(
             value=[{"role": "assistant", "content": welcome_message}], #
             elem_id="chatbot",
-            label="WAMind 1.2",
+            label="DB-Mind 1.2-b",
             show_copy_button=True,
             avatar_images=(None, "data/icon.png"),
             type='messages',  # <-- Add this line back
