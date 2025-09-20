@@ -36,6 +36,31 @@ if __name__ == "__main__":
         "max_threads": 1,
     }
 
+    # Optional password protection via env vars
+    # Supports either APP_USERNAME + APP_PASSWORD or APP_AUTH="u1:p1,u2:p2"
+    auth_pairs = []
+    multi_auth = os.environ.get("APP_AUTH")
+    if multi_auth:
+        for token in multi_auth.split(","):
+            token = token.strip()
+            if not token or ":" not in token:
+                continue
+            u, p = token.split(":", 1)
+            u, p = u.strip(), p.strip()
+            if u and p:
+                auth_pairs.append((u, p))
+    else:
+        user = os.environ.get("APP_USERNAME")
+        pwd = os.environ.get("APP_PASSWORD")
+        if user and pwd:
+            auth_pairs.append((user, pwd))
+
+    if auth_pairs:
+        launch_kwargs["auth"] = auth_pairs[0] if len(auth_pairs) == 1 else auth_pairs
+        launch_kwargs["auth_message"] = os.environ.get(
+            "APP_AUTH_MESSAGE", "Private demo – enter recruiter password"
+        )
+
     if os.environ.get("HF_SPACE_ID") or os.environ.get("SPACE_ID"):
         launch_kwargs.update(server_name="0.0.0.0", server_port=port, share=False)
     else:
