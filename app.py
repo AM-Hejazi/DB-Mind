@@ -17,8 +17,8 @@ if __name__ == "__main__":
         "max_threads": 1,
     }
 
-    if os.environ.get("SPACE_ID"):
-        launch_kwargs.update(server_name="0.0.0.0", server_port=port)
+    if os.environ.get("HF_SPACE_ID") or os.environ.get("SPACE_ID"):
+        launch_kwargs.update(server_name="0.0.0.0", server_port=port, share=True)
     else:
         launch_kwargs.update(server_name="127.0.0.1", server_port=port, share=True, favicon_path="data/icon.png")
 
