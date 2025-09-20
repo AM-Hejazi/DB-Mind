@@ -85,7 +85,6 @@ def reset_state(session_state):
         gr.update(visible=False),
         gr.update(visible=False),
         gr.update(visible=input_visible),
-        session_state
     )
 
 
@@ -128,7 +127,7 @@ def handle_user_input(message, history, session_state):
         session_state["fd_feedback_history"] = fd_chat
         logger.log("FD Feedback/User", message)
         return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                  inputrow=True), session_state
+                                                  inputrow=True)
 
     max_questions = session_state.get("max_questions", 2) or 2
     question_count = session_state.get("question_count", 0)
@@ -140,7 +139,7 @@ def handle_user_input(message, history, session_state):
             session_state["skip_pipeline"] = True
             history.append({"role": "user", "content": message})
             history.append({"role": "assistant", "content": LIMIT_REACHED_MESSAGE})
-            return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False, inputrow=False), session_state
+            return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False, inputrow=False)
         session_state["question_count"] = question_count + 1
         session_state["question_started"] = True
         session_state["limit_reached"] = False
@@ -161,7 +160,7 @@ def handle_user_input(message, history, session_state):
             "content": f"⏩ Front-Desk agent skipped. Proceeding with:\n\n> *{skipped_q}*\n\n🗂️ Schema Retriever running..."
         })
         return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                  inputrow=True), session_state
+                                                  inputrow=True)
 
     # First question setup
     if not session_state["original_q"]:
@@ -170,13 +169,13 @@ def handle_user_input(message, history, session_state):
         logger.log("Original Question", message)
 
     return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                              inputrow=True), session_state
+                                              inputrow=True)
 
 
 def process_next_step(history, session_state):
     if session_state.get("skip_pipeline"):
         session_state["skip_pipeline"] = False
-        return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False, inputrow=False), session_state
+        return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False, inputrow=False)
 
     print("🔁 process_next_step triggered")
     print("📜 History length:", len(history))
@@ -186,7 +185,7 @@ def process_next_step(history, session_state):
     if not session_state.get("final_q") or not session_state["final_q"].strip():
         if history[-1]["role"] != "user":
             return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                      inputrow=True), session_state
+                                                      inputrow=True)
 
         user_input = history[-1]["content"]
         reply, clarified, updated = fd_chat_step(
@@ -210,12 +209,12 @@ def process_next_step(history, session_state):
             history.append({"role": "assistant", "content": reply})
 
         yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                             inputrow=True), session_state
+                                             inputrow=True)
 
     # === Schema Retriever ===
     if "Schema Retriever running" in history[-1]["content"]:
         yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                             inputrow=True), session_state
+                                             inputrow=True)
 
         schema_result = retrieve_schema_with_llm(session_state["final_q"])
         session_state["complexity"] = schema_result.get("complexity")
@@ -228,16 +227,16 @@ def process_next_step(history, session_state):
             msg = "⚠️ Your question doesn't seem related to our warehouse database schema. Try asking a new valid question about shipments, items, orders, transport units, etc."
             history.append({"role": "assistant", "content": msg})
             return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                             inputrow=True), session_state
+                                             inputrow=True)
 
         history.append({"role": "assistant", "content": "⚙️ Generating SQL Query..."})
         yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                             inputrow=True), session_state
+                                             inputrow=True)
 
     # === SQL Generator ===
     if "Generating SQL" in history[-1]["content"]:
         yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                             inputrow=True), session_state
+                                             inputrow=True)
 
         if session_state.get("sql_query"):
             return None
@@ -281,13 +280,13 @@ def process_next_step(history, session_state):
                     logger.log("Analyzer Crash", str(e))
                     history.append({"role": "assistant", "content": f"❌ Analyzer crashed: `{str(e)}`"})
                     yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                         inputrow=True), session_state
+                                                         inputrow=True)
                     return None
 
                 if not corrected_sql or not isinstance(corrected_sql, str) or not re.search(r"\bselect\b", corrected_sql.strip(), re.IGNORECASE):
                     history.append({"role": "assistant", "content": "❌ Analyzer failed to produce a valid SQL query. Please try rephrasing your question."})
                     yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                         inputrow=True), session_state
+                                                         inputrow=True)
                     return None
 
                 session_state["sql_query"] = corrected_sql
@@ -335,7 +334,7 @@ def process_next_step(history, session_state):
             session_state["feedback"] = True
 
             yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                 inputrow=True), session_state
+                                                 inputrow=True)
 
         except Exception as e:
             logger.log("Validator/CG error", str(e))
@@ -346,7 +345,7 @@ def process_next_step(history, session_state):
             session_state["feedback"] = True
 
             yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                                 inputrow=True), session_state
+                                                 inputrow=True)
 
     # === FD Feedback Agent Phase ===
     if session_state.get("feedback") is True:
@@ -381,11 +380,11 @@ def process_next_step(history, session_state):
             logger.log("FD Feedback/Reply", reply)
             logger.save()
             yield "", history, *update_ui_visibility(session_state, log_file=show_log, feedback_rating=False,
-                                                     inputrow=True), session_state
+                                                     inputrow=True)
         except Exception as e:
             logger.log("FD Feedback Crash - agent call", str(e))
             reply = "❌ Feedback Agent crashed. Please retry."
             history.append({"role": "assistant", "content": reply})
 
     return "", history, *update_ui_visibility(session_state, log_file=True, feedback_rating=False,
-                                          inputrow=True), session_state
+                                          inputrow=True)

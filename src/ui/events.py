@@ -19,7 +19,6 @@ def bind_event_handlers(elements, session_state):
             elements["log_file"],
             elements["feedback_rating"],
             elements["inputrow"],
-            session_state,
         ],
     ).then(
         fn=process_next_step,
@@ -30,7 +29,6 @@ def bind_event_handlers(elements, session_state):
             elements["log_file"],
             elements["feedback_rating"],
             elements["inputrow"],
-            session_state,
         ],
     )
 
@@ -44,7 +42,6 @@ def bind_event_handlers(elements, session_state):
             elements["log_file"],
             elements["feedback_rating"],
             elements["inputrow"],
-            session_state,
         ],
     ).then(
         fn=process_next_step,
@@ -55,7 +52,6 @@ def bind_event_handlers(elements, session_state):
             elements["log_file"],
             elements["feedback_rating"],
             elements["inputrow"],
-            session_state,
         ],
     )
 
@@ -69,7 +65,6 @@ def bind_event_handlers(elements, session_state):
             elements["log_file"],  # update file
             elements["feedback_rating"],  # update rating
             elements["inputrow"],  # show/hide input
-            session_state,  # keep session
         ]
 
     )
