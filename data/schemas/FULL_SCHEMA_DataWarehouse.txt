@@ -1,0 +1,950 @@
+Table ART {
+  // Die 'ART' Tabelle beinhaltet alle WAMAS relevanten Stamdaten eines Artikels, Artikelstamm
+  ARTBEZ string // Atikelbezeichnung, Artikelbezeichnung
+  ARTBEZ2 string // zusätzliche Artikelbezeichnung kann auch die verlängerung der 'ARTBEZ' sein, Artikelbezeichnung 2
+  ABCKZ string // ABC Kennzeichen, hiermit werdne Artikel gekennzeichnet bei denen automatisch eine ABC analyse durchgeführt werden soll mit 'J' ja / 'N' nein, ABC-Wert-Analyse
+  ABCWERT float // ABC WERT der nach entsprechender Berechnung dem Artikel zugewiesen wird, ABC-Wert
+  ARTGRP string // Artikelgruppe, Artikelgruppe
+  ARTTYP string // Artikeltyp, Artikeltyp
+  CHARGEPFLWE string // eingabepflicht für die CHARGENNUMMER im Wareneingang J/N, Chargen-Pflicht WE
+  CHARGEPFLWA string // eingabepflicht für die CHARGENNUMMER im Warenausgang J/N, Chargen-Pflicht WA
+  INVGRP string // Inventurgruppe, Inventurgruppe
+  SATZKZ string // Datensatzkennzeichen, Satzkennzeichen
+  STATUS string // Status, Status
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  AID_ARTNR string [pk] // Artikel Identifikation Artikelnummer, Artikelnummer
+  GEWTOLPROZWE float // Gewichtstoleranz in Prozent im Wareneingang, Gewichtstoleranz WE [%]
+  STAPELKZAHL float // Stapelkennzahl, Stapelkennzahl
+  ALTAID_ARTNR string // alternative artikel identifikation Artikelnummer, Artikelnummer
+  UEBERLIEFERLWE string // überlieferung erlaubt im Wareneingang, überliefern erlaubt WE
+  MHDPFLWE string // eingabepflich Mindesthaltbarkeit im Warenausgang, MHD-Pflicht WE
+  MHDPFLWA string // eingabepflich Mindesthaltbarkeit im Wareneingang, MHD-Pflicht WA
+  STAPELHOEHE float // Stabelhöhe , Stapelhöhe
+  NETTOGEW float // Nettogewicht des Artikels, Nettogewicht [kg]
+  ARTMISCHERL string // Artikel mischen erlaubt J/N, Artikel mischen erlaubt
+  AUSPRMISCHERL string // Ausprägung mischen erlaubt J/N, Ausprägungen mischen erlaubt
+  CHARGEMISCHERL string // Charge mischen erlaubt J/N, Chargen mischen erlaubt
+  MHDMISCHERL string // Mindesthaltbarkeit mischen erlaubt J/N, MHD mischen erlaubt
+  ARTKOMGRP_ARTKOMGRPID string // Artikelkommissioniergruppe, Artikelkommissionierstrategie
+  AKS_ARTKLASSE string // Artikelklasse, Artikelklasse
+  ANZEIGE_EINHEIT string // Anzeige Einheit die dem Kommissionierer am MDE angezeigt wir, Anzeigeeinheit
+  BESTAND_EINHEIT string // Bestands Einheit für die Bestandsführung in WAMAS, Bestandseinheit
+  HOSTUNITS_HOSTEINH string // Gewichtseinheit (kg, g, mg), HOST Gewichtseinheit
+  SORT_SORTIMENT string // Sortiment, Sortiment
+  WAGRP_WAGRPID string // Warenausgangsgruppen Identifikation, WA-Gruppe
+  THM_THMID string // Stamm Transporthilfsmittel Identifikation, Transporthilfsmittel
+  LBWE_LAGIDWE string // Lagerbereich Identifikation Wareneingang, Lagerbereich Wareneingang
+  GEFGUTBUCHS string // Gefahrgutbuchstabe , Gefahrgutbuchstabe
+  GEFGUTCHEMBEZ string // Gefahrgut Chemische Bezeichnung, chem. tech. Bezeichnung
+  GEFGUTEINH string // Gefahrgut Einheit, Gefahrguteinheit
+  GEFGUTKLASSE string // Gefahrgut Klasse, Gefahrgutklasse
+  GEFGUTUNNR string // UN Nummer, UN-Nummer
+  GEFGUTZIFFER string // Gerfahrgut Ziffer, Gefahrgutziffer
+  GEFGUTVERPGRP string // Gefahargut Verpackungsgruppe, Verpackungsgruppe
+  GEFGUTKLASSCODE string // Gefahrgut Klasse Code, Klassifizierungscode
+  GEFGUTSTOFFBEZ string // Gefahrsoffbezeichnung 1, Stoff Bezeichnung
+  GEFGUTSTOFFBEZ2 string // Gefahrsoffbezeichnung 2, Stoff Bezeichnung 2
+  GEFGUTSTOFFBEZ3 string // Gefahrsoffbezeichnung 3, Stoff Bezeichnung 3
+  INFO string // Iformation zum Artikel, Information
+  STAPELGEW float // Staplebares Gewicht in Kg, stapelbares Gewicht [kg]
+  ARTSTAT_ARTSTATGRP string // artikelstatistik gruppe, Artikelgruppe Stat.
+  WA_MATZID string // Warenausgang Materialzustand identifikation, Materialzustands-ID WA
+  WE_MATZID string // Wareneingang Materialzustand identifikation, Materialzustands-ID WE
+  WALVSSORT_LVSSORTIMENT string // Lagerverwaltungssoftware Sortiment im Warenausgang, LVS-Sortiment
+  FERT_MATZID string // Fertigung Mateialzustand identifikation, Materialzustands-ID Fert
+  MATQMISCHERL string // Materialqualifikation mischen erlaubt J/N, Materialqualifikation mischen erlaubt
+  BESTERFARTWH string // Art der Bestandserfassung im Lager, Bestandserfassungsart Lager
+  CHARGEPFLWH string // Chargenpflicht beim Lagern, Chargenpflicht Lager
+  MHDPFLWH string // Mindesthaltbarkeit pflicht beim Lagern, MHD-Pflicht Lager
+  REIFENKZ string // Reifen Kennzeichnung, Reifen
+  LASTQUITTDATE datetime // Zeitstempel der letzten quittierung, Letzte Quittierung am
+  SVERSKLASSE string // Sonderversandklasse, Sonder-Versandklasse
+  KUVERTVERSANDKZ string // Kuvertversandfähig kennzeichen, Kuvert versandfähig
+  AUTONACHMNG float // Nachschubschwellwert mindestmenge zum auslösen eines Transportes aus dem Nachschubbereich und Maximalschwellwert für das beliefern aus dem Wareneingang, Nachschubsgrenze
+  LQNUMMER string // Begrenzte Menge nummer
+  GEFAHRENGUTMENGE float // Gefahrgut menge
+  SCSNACHMNG float // Nachschubschwellwert ab dem die Menge aus dem Wareneingang in den Automatischen Bereich geschickt wird
+  GEFGUTHINT_1 float // Gefahrgut Aufkleber 1 J/N
+  GEFGUTHINT_2 float // Gefahrgut Aufkleber 2 J/N
+  GEFGUTHINT_3 float // Gefahrgut Aufkleber 3 J/N
+  GEFGUTHINT_4 float // Gefahrgut Aufkleber 4 J/N
+  GEFGUTHINT_5 float // Gefahrgut Aufkleber 5 J/N
+  GEFGUTHINT_6 float // Gefahrgut Aufkleber 6 J/N
+  GEFGUTHINT_OS float // Gefahrgut Aufkleber Overpack J/N
+  KITARTKZ string // Kit Artikel Kennzeichen
+}
+
+Table ARTE {
+  AID_ARTNR string [pk] // Artikel Identifikation Artikelnummer, Artikelnummer
+  EINHEIT string [pk] // Artikeleinheit, Einheit
+  TARAGEW float // Tara Gewicht, Taragewicht [kg]
+  ZAEHLER float // Zähler, Zähler
+  NENNER float // Nenner, Nenner
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  SATZKZ string // Datensatzkennzeichen, Satzkennzeichen
+  LAENGE float // Länge des Artikels in mm, Länge [mm]
+  BREITE float // Breite des Artikels mm, Breite [mm]
+  HOEHE float // Höhe des Artikels mm, Höhe [mm]
+  VOL float // Volumen des Artikels in dm³, Volumen [dm³]
+  GEFGUTPUNKTE float // Gefahrgut Punkte, Gefahrgutpunkte
+  INFO string // Kurzinfo, Information kurz
+  STAPELFAKT float // Stapelfaktor beim Verschachteln des Artikels, Stapelfaktor Volumen [%]
+  TEILNACHMNG float // Schwellwert für Teilnachschub, Teilnachschubmenge
+  INVMNGKOM float // Inventur Menge Kommissionierung, Inventurmenge Kom
+  INVMNGTPA float // Invetur Menge Transport, Inventurmenge TPA
+  NACHMNG float // Schwellwert für Nachschub, Nachschubmenge
+  WAMASGENKZ string // datensatz duch wamas generiert, WAMAS generiert
+  GEWKS_GEWKLASSE string // Gewichtsklasse, Gewichtsklasse
+  HANDKS_HANDKLASSE string // handlingsklasse, Handlingklasse
+  INNENDURCHM float // innendurchmesser des Reifens, Reifen-Innendurchmesser [mm]
+  ARTLBLLAYOUT string // Artikel Label Layout, Artikel-Etikette Layout
+  SIDEUPKZ string // Aufrechtverplanung
+}
+
+Table ARTEAN {
+  // Die 'ARTE' Tabelle beinhaltet alle WAMAS relevanten Einheitendaten eines Artikels, Artikelstamm EAN
+  AID_ARTNR string [pk] // Artikel Identifikation Artikelnummer, Artikelnummer
+  EAN string [pk] // EAN Nummer, EAN
+  SATZKZ string // Datensatzkennzeichen, Satzkennzeichen
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  LETZTERSCAN datetime // Zuletzt gescannt worden, Letzte Codeverwendung
+  EST_EINHEIT string // Artikeleinheit, Einheit
+}
+
+Table ARTWFL {
+  // Die 'ART' Tabelle beinhaltet alle WAMAS relevanten Stamdaten eines Artikels, Artikelstamm Warenfluss
+  AID_ARTNR string [pk] // Artikel Identifikation Artikelnummer, Artikelnummer
+  POSNR float [pk] // Positionsnummer, PosNr
+  SATZKZ string // Datensatzkennzeichen, Satzkennzeichen
+  HIST_ANZEIT datetime // User der den Datensatz angelegt hat, Anlegezeit
+  HIST_AEZEIT datetime // User der den Datensatz zu letzt geändert hat, Änderungszeit
+  HIST_ANUSER string // Zeitstempel an dem der Datensatz zuletzt geändert wurde, angelegt von
+  HIST_AEUSER string // Zeitstempel an dem der Datensatz erzeugt wurde, geändert von
+  LRFK_LAGRF string // Lagerreihenfolge, Lagerreihenfolge
+  LVSMATQ_LVSMATQID string // Lagerverwaltungssoftware Material Qualifikation, LVS Materialqualifikation-Id
+  SCHEMA_SCHEMA string // Schema, Schema
+}
+
+Table FES {
+  // Die 'FES' Tabelle beinhaltet alle WAMAS relevanten Stammdaten eines Feldstamms, Feldstamm
+  ABCWERT float // zugeordneter ABC Wert der Position, ABC-Wert
+  DELEMPTYZEROTUPOS string // Auflösen einer Transporteineheitsposition mit Mange 0 J/N
+  EBENE float // Ebene, Ebene
+  EBENEEXT float // Ebene Ext., Ebene Ext.
+  FELDID string [pk] // Feldidentifikationsnummer des Lagerplatzes, Lagerplatz
+  FTS_FETID string // Feldtyp, Feldtyp
+  GANG float // Gang, Gang
+  GANGEXT float // Gang ext., Gang Ext.
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geandert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Anderungszeit
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  LBCL_LAGIDCL string // zuweisung zum Lagerbereich Klärplatz, Lagerbereich Klarplatz
+  LBFERT_LAGIDFERT string // zuweisung zum Lagerbereich Fertigung, Lagerbereich Fertigung
+  LBINV_LAGIDINV string // zuweisung zum Lagerbereich Inventur, Lagerbereich Inventur
+  LBST_LAGIDST string // zuweisung zum Lagerbereich Strategisch, Lagerbereich Strategisch
+  LBSTAT_LAGIDSTAT string // zuweisung zum LagerbereichStatistik, Lagerbereich Stat.
+  LBWA_LAGIDWA string // zuweisung zum Lagerbereich Warenausgang, Lagerbereich Warenausgang
+  LBWE_LAGIDWE string // zuweisung zum Lagerbereich Wareneingang, Lagerbereich Wareneingang
+  LKS_LAGKLASSE string // Lagerklasse, Lagerklasse
+  MODID float // Model Identifikation, ModId
+  OFFS_L_X float // Offset X Koordinate, X-Koordinate
+  OFFS_L_Y float // Offset Y Koordinate, Y-Koordinate
+  OFFS_L_Z float // Offset Z Koordinate, Z-Koordinate
+  PAUSEPOS string // Pause Position, Pause - Position
+  REG_LAGIDPHY string // zuweisung zum Lagerbereich Physikalisch, Lagerbereich Physikalisch
+  REG_REGAL float // Regalnummer, Regal
+  REG_REGALTEIL float // Regalteilnummer, Regalteil
+  REGALEXT float // Regal ext., Regal Ext.
+  SPALTE float // Regal Spalte, Spalte
+  SPALTEEXT float // Regal Spalte ext., Spalte Ext.
+  WAMODINFO string // Wamas Model Info, Modellierungsinfo
+  WAMODINFO2 string // Wamas Model Info 2, Modellierungsinfo 2
+  REQPOS_FELDID string // Lagerplatz
+}
+
+Table FESP {
+  // Die 'FESP' Tabelle beinhaltet alle WAMAS relevanten Stammdaten einer Feldstammposition, Feldstammposition
+  EANFELDQERL string // Bestätigen durch scan der EAN und Feldposition erlaubt J/N, Bestatigung mit EAN und Position
+  EANQUITTERL string // Bestätigen durch scan der EAN erlaubt J/N, Bestatigung mit EAN-Code
+  FELDBEZ string // Feldbezeichnung / Lagerposition, Bezeichnung
+  FELDID string [pk] // Feldidentifikationsnummer , Lagerplatz
+  FELDKBEZ string // Feldkurzbezeichnung, Kurzbezeichnung
+  FELDKOMGRP_FELDKOMGRPID string // zugewiesene Feldkommissioniergruppe, Feldgruppe
+  FELDKQUITT string // Feldkurzquittiercode, Feld-Kurzquittierungs-Code
+  FELDKQUITTERL string // Bestätigen mit Feldkurzquittiercode erlaubt J/N, Bestatigung mit Kurzquittierungs-Code
+  FELDQUITT string // Feldquitiercode, Feld-Quittierungs-Code
+  FELDQUITTERL string // Bestätigung durhc Feldquitiercode erlaubt J/N, Bestatigung mit Position
+  FESPKZ string // Feldstammpositionstyp, Feldstammpositionstyp
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geandert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Anderungszeit
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  INVZEIT datetime // Zeit der Letzten inventur auf der Feldposition, Inventurzeit
+  KOMGEWINITKZ string // Gewicht in der Kommissiniermaske vorinitialisieren, Gewicht vorinitialisieren
+  KOMMNGINITKZ string // Menge in der Kommissiniermaske vorinitialisieren, Menge vorinitialisieren
+  KOMPOSINITKZ string // Feldstammposition in der Kommissiniermaske vorinitialisieren, Position vorinitialisieren
+  LASTCOMTIME datetime // Letzte Kommissionierzeit auf der Feldstammposition, Letzte Kommissionierzeit
+  LASTCORRTIME datetime // Letzte Korrekturzeit auf der Feldstammposition, Letzte Korrekturzeit
+  LASTREPLTIME datetime // Letzte Nachschubzeit auf der Feldstammposition, Letzte Nachschubzeit
+  LASTTUMOVTIME datetime // Letzte Bewegungszeitzeit auf der Feldstammposition, Letzte TE Bewegungszeit
+  LBKOM_LAGIDKOM string // zugewiese LAgerbereich Kommissionierung, Lagerbereich Kommissionierung
+  LBTPA_LAGIDTPA string // zugewiese Lagerbereich Transport, Lagerbereich Transport
+  OFFS_L_X float [pk] // offset X der position im Feld, X-Koordinate
+  OFFS_L_Y float [pk] // offset Y der position im Feld, Y-Koordinate
+  OFFS_L_Z float [pk] // offset Z der position im Feld, Z-Koordinate
+  OKQUITTERL string // Bestätigen mit OK Taste J/N, Bestatigung mit OK-Taste
+  RBTPA_GNAME string // Zugewiesene Transportrouting Gruppe, Routingknoten TPA
+  RBTPA_NNAME string // Zugewiesene Transportrouting Knoten, Routingknoten TPA
+  RBVPL_GNAME string // Zugewiesene Verplanungs Gruppe, Routingknoten VPL
+  RBVPL_NNAME string // Zugewiesene Verplanung Knoten, Routingknoten VPL
+  STATION_STID string // Zugeordnete WAMASC Station
+  TEQUITTERL string // Bestätigen durch Transporteinheit Identifikationsnummer erlaubt J/N, Bestatigung mit TE-Id
+  VOL_L_X float // Feldpositions größe X, X-Koordinate
+  VOL_L_Y float // Feldpositions größe Y, Y-Koordinate
+  VOL_L_Z float // Feldpositions größe Z, Z-Koordinate
+  ZIELINITKZ string // Zielposition vorinitialisieren, Ziel vorinitialisieren
+  STAMM_FELDID string // Stamm Lagerplatz
+  STAMM_OFFS_L_X float // X-Koordinate
+  STAMM_OFFS_L_Y float // Y-Koordinate
+  STAMM_OFFS_L_Z float // Z-Koordinate
+}
+
+Table FFE {
+  // Die 'FFE' Tabelle gibt Feldpositionen aus die frei sind, Freie Feldteile
+  GEW float // Gewicht, Gewicht [kg]
+  POS_FELDID string [pk] // Feldidentifikationsnummer , Lagerplatz
+  POS_OFFS_L_X float [pk] // offset X der position im Feld, X-Koordinate
+  POS_OFFS_L_Y float [pk] // offset Y der position im Feld, Y-Koordinate
+  POS_OFFS_L_Z float [pk] // offset Z der position im Feld, Z-Koordinate
+  POS_RAS_R_X float [pk] // Raster offset X der position im Feld, X-Koordinate
+  POS_RAS_R_Y float [pk] // Raster offset Y der position im Feld, Y-Koordinate
+  POS_RAS_R_Z float [pk] // Raster offset Z der position im Feld, Z-Koordinate
+  TYP string [pk] // Typ, Typ
+  VOL_L_X float [pk] // Feldgröße X, X-Koordinate
+  VOL_L_Y float [pk] // Feldgröße Y, Y-Koordinate
+  VOL_L_Z float [pk] // Feldgröße Z, Z-Koordinate
+}
+
+Table FSP {
+  // Die 'FSP' Tabelle beinhaltet Feldpositionen die Gesperrt sind, Feldsperre
+  FSPGRUND string [pk] // Grund der Feldsperrung, Sperrgrund
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  POS_FELDID string [pk] // Feldidentifikationsnummer , Lagerplatz
+  POS_OFFS_L_X float [pk] // offset X der position im Feld, X-Koordinate
+  POS_OFFS_L_Y float [pk] // offset Y der position im Feld, Y-Koordinate
+  POS_OFFS_L_Z float [pk] // offset Z der position im Feld, Z-Koordinate
+  POS_RAS_R_X float // Raster offset X der position im Feld, X-Koordinate
+  POS_RAS_R_Y float // Raster offset Y der position im Feld, Y-Koordinate
+  POS_RAS_R_Z float // Raster offset Z der position im Feld, Z-Koordinate
+  TPAVPLCHECKKZ string // Umlagern für Feldsperre J/N, Umplanen für Sperren
+  TYP_AUS float // Auslagersperre Typ, Sperrtyp : Auslagersperre
+  TYP_EIN float // Einlagersperre Typ, Sperrtyp : Einlagersperre
+  VOL_L_X float // Feldpositions größe X, X-Koordinate
+  VOL_L_Y float // Feldpositions größe Y, Y-Koordinate
+  VOL_L_Z float // Feldpositions größe Z, Z-Koordinate
+}
+
+Table P_AUSK {
+  // Die 'P_AUSK' Tabelle beinhaltet Kopfdaten von Warenausgangs Aufträge, Auslagerauftrag_Kopf_Protokoll
+  AUSK_ADRS_ADR string // Adresse des Kunden Straße, Adresse
+  AUSK_ADRS_ADR2 string // Adresse des Kunden Straße 2, Adresse 2
+  AUSK_ADRS_ANREDE string // Anrede des Kunden, Anrede
+  AUSK_ADRS_EMAIL string // Email des Kunden, e-mail
+  AUSK_ADRS_FAX string // Faxnummer des Kunden, Faxnummer
+  AUSK_ADRS_LAND string // Adresse des Kunden Land, Land
+  AUSK_ADRS_NAME string // Name des Kunden, Name
+  AUSK_ADRS_NAME2 string // Name des Kunden 2, Name 2
+  AUSK_ADRS_NAME3 string // Name des Kunden 3, Name 3
+  AUSK_ADRS_NAME4 string // Name des Kunden 4, Name 4
+  AUSK_ADRS_ORT string // Adresse des Kunden ORT, Ort
+  AUSK_ADRS_ORTTEIL string // Adresse des Kunden Ortsteil, Ortsteil
+  AUSK_ADRS_PLZ string // Adresse des Kunden Postleitzahl/ Zipcode / Postelcode, Postleitzahl
+  AUSK_ADRS_TEL string // Telefonnummer des Kunden, Telefon
+  AUSK_ADRS_WWW string // Internetadresse des Kunden, Homepage
+  AUSK_ANZPOS float // Anzahl von Positionen im Auftrag, Anzahl Positionen
+  AUSK_AUSID_AUSNR string // Auslagerauftragsnummer, Auftragsnummer
+  AUSK_AUTYP_TYP string // Auslagerauftragtyp, Auftragstyp
+  AUSK_BATCHKOMPFLKZ string // Kennzeichen für Batchkommissionierpflicht , Batch-Kommissionierung Pflicht
+  AUSK_BESTZEIT datetime // Bestellzeit, Bestellzeit
+  AUSK_EXTREF string // Externe Referenz im Auftragskopf, externe Referenz
+  AUSK_FERTZEIT datetime // Zeitpunkt der Fertigstellung des Auftrages, Fertigzeit
+  AUSK_FORCETOURPERORDERKZ string // Kennzeichen Tour Per Auftrag, Tour pro Auftrag zwingend
+  AUSK_GEPLBEREITTERM datetime // Geplanter Bereitstelltermin / bis wann soll der Auftrag Fertiggestellt sein, geplanter Bereitstelltermin
+  AUSK_GEPLEINSTRAT_LAGRF string // Geplante Lagerreihenfolge für Warenausgang, gepl. Lagerreihenfolge
+  AUSK_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  AUSK_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  AUSK_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  AUSK_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  AUSK_INFO2HOST string // Info an HOST, Info für Host
+  AUSK_INFO2WAMAS string // Info an WAMAS, Info für Wamas
+  AUSK_KITAID_ARTNR string // Kit Auftrag Artikelnummer
+  AUSK_KST_KUNR string // Kundennummer, Kundennummer
+  AUSK_LIEFADRS_ADR string // Lieferadresse , Adresse
+  AUSK_LIEFADRS_ADR2 string // Lieferadresse 2, Adresse 2
+  AUSK_LIEFADRS_ANREDE string // Lieferadresse Anrede, Anrede
+  AUSK_LIEFADRS_EMAIL string // Lieferadresse email, e-mail
+  AUSK_LIEFADRS_FAX string // Lieferadresse Fax, Faxnummer
+  AUSK_LIEFADRS_LAND string // Lieferadresse Land, Land
+  AUSK_LIEFADRS_NAME string // Lieferadresse Name, Name
+  AUSK_LIEFADRS_NAME2 string // Lieferadresse Name 2, Name 2
+  AUSK_LIEFADRS_NAME3 string // Lieferadresse Name 3, Name 3
+  AUSK_LIEFADRS_NAME4 string // Lieferadresse Name 4, Name 4
+  AUSK_LIEFADRS_ORT string // Lieferadresse Ort, Ort
+  AUSK_LIEFADRS_ORTTEIL string // Lieferadresse Ortsteil, Ortsteil
+  AUSK_LIEFADRS_PLZ string // Lieferadresse Postleitzahl/Zip code/ postalcode, Postleitzahl
+  AUSK_LIEFADRS_TEL string // Lieferadresse telefonnummer, Telefon
+  AUSK_LIEFADRS_WWW string // Lieferadresse Website, Homepage
+  AUSK_LIEFTERM datetime // Liefertermin (bereitstellung auf Kundenwunsch), Liefertermin
+  AUSK_LOKAUTYP_KONSOLKZ string // Konsolidierung erlaubt J/N, Konsolidieren erlaubt
+  AUSK_PRIO string // AuftragsPriorität, Priorität
+  AUSK_RAHMENTOURID_INTLFDNR float // Tour Identifikation Laufende Nummer, laufende Nummer
+  AUSK_RAHMENTOURID_TOURNR string // Tour Identifikationsnummer, Tournummer
+  AUSK_RECHNUNGPRINTKZ string // Rechnung druck erforderlich J/N, Rechnung gedruckt
+  AUSK_REPRNTEID string // Rechnung gedruckt in Transporteinheit, Rechnung in TE
+  AUSK_STARTZEIT datetime // Auftragsstartzeit, Startzeit
+  AUSK_STATUS string // Auftrag Status, Status
+  AUSK_VAST_VERSANDART string // Wamas Versandart, Versandart
+  AUSK_VPLSTRAT string // Verplanungsstrategie, Soll Verplanungsstrategie
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTZEIT datetime // Protokollzeit, Protokollzeit
+}
+
+Table P_AUSKI {
+  // Die 'P_AUSKI' Tabelle beinhaltet zusätzliche Warenausgangs Kopf Texte, Protokoll Auslagerauftragskopftexte
+  AUSKI_AUSID_AUSNR string // Auftragsnummer, Auftragsnummer
+  AUSKI_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  AUSKI_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  AUSKI_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  AUSKI_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  AUSKI_POSNR float // Positionsnummer, PosNr
+  AUSKI_TEXT string // Text, Text
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTPOSNR float [pk] // Protokollpositionsnummer, PosNr
+}
+
+Table P_AUSP {
+  // Die 'P_AUSP Tabelle beinhaltet Warenausgangauftragspositionen, Protokoll Auslagerauftrag_Position
+  AUSP_AUSID_AUSNR string // Auslagerauftragsnummer, Auftragsnummer
+  AUSP_BESTMNGS_GEW float // gewicht der bestellten Meng, Gewicht [kg]
+  AUSP_BESTMNGS_GEWBASIS float // basisgewicht des bestellten artikels, Gewicht Basis [kg]
+  AUSP_BESTMNGS_MNG float // bestellte menge, Menge
+  AUSP_EXTREF string // externe referenz, externe Referenz
+  AUSP_FREIMNGS_GEW float // gewicht der freigegebnenen menge, Gewicht [kg]
+  AUSP_FREIMNGS_GEWBASIS float // basisgewicht des bestellten artikels, Gewicht Basis [kg]
+  AUSP_FREIMNGS_MNG float // freigegebene menge, Menge
+  AUSP_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  AUSP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  AUSP_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  AUSP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  AUSP_INFO string // Info, Info
+  AUSP_LIEFMNGSHOST_GEW float // gewicht der liefermenge an host, Gewicht [kg]
+  AUSP_LIEFMNGSHOST_GEWBASIS float // basisgewicht des gelieferten Artikels an host, Gewicht Basis [kg]
+  AUSP_LIEFMNGSHOST_MNG float // liefermenge an host, Menge
+  AUSP_LIEFMNGSWAMAS_GEW float // gewicht der liefermenge in Wamas, Gewicht [kg]
+  AUSP_LIEFMNGSWAMAS_GEWBASIS float // basisgewicht des gelieferten Artikels in wamas, Gewicht Basis [kg]
+  AUSP_LIEFMNGSWAMAS_MNG float // liefermenge in wamas, Menge
+  AUSP_MID_AID_ARTNR string // artikelnummer, Artikelnummer
+  AUSP_MID_CHARGE string // charge, Charge
+  AUSP_MID_MATQ string // materialqualifikation, Materialqualifikations-Id
+  AUSP_MID_MATZID string // materialzustandsidentifikationsnummer, Materialzustands-ID
+  AUSP_MID_MHD datetime // mindesthaltbarkeitsdatum, MHD
+  AUSP_MID_RESNR string // reservierungsnummer, Reservierungsnummer
+  AUSP_MID_THMKZ string // transporthilfsmittelkennzeichnung, Transporthilfsmittel Kz
+  AUSP_MID_WENR string // wareneingangsnummer, Wareneingangsnummer
+  AUSP_NOFEHLMNGCHKKZ string // fehlmengenprüfung J/N, Keine Fehlmengenprüfung
+  AUSP_ORIGPOSNR float // original positionsnummer, orig. Positionsnummer
+  AUSP_POSNR float // positionsnummer, Positionsnummer
+  AUSP_STATUS string // status, Status
+  AUSP_URAUSID_AUSNR string // ursrüngliche auslagerauftragsnummer, Auftragsnummer
+  AUSP_URAUSID_HOSTAUSKZ string // ustprüngliche host kennzeichnung, Host Ausgangskennzeichen
+  AUSP_URAUSID_MAND string // ustprüngliche mandant, Mandant
+  AUSP_URBESTMNGS_GEW float // ursprüngliche gewicht der bestellten menge, Gewicht [kg]
+  AUSP_URBESTMNGS_GEWBASIS float // urspüngliche basisgewicht des bestellten Artikels, Gewicht Basis [kg]
+  AUSP_URBESTMNGS_MNG float // ursprüngliche bestellmenge, Menge
+  AUSP_URPOSNR float // ursprüngliche positionsnummer, UrPositionsnummer
+  AUSP_VPLMNGS_GEW float // gewicht der verplanten menge, Gewicht [kg]
+  AUSP_VPLMNGS_GEWBASIS float // basisgewicht des verlanten artikels, Gewicht Basis [kg]
+  AUSP_VPLMNGS_MNG float // verplante menge, Menge
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTPOSNR float [pk] // protokolliertepositionsnummer, PosNr
+}
+
+Table P_TEK {
+  // Die 'TEK' Tabelle beinhaltet Transporteinheit Kopfdaten, Transporteinheitkopf_Protokoll_t
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTZEIT datetime // Protokollzeit, Protokollzeit
+  TEK_AUSRICHTUNG float // Transporteinkeit ausrichtung
+  TEK_EIN_LAGRF string // Einlagerreihenfolge, Einlagerreihenfolge
+  TEK_EINZEIT datetime // Einlagerzeit, Einlagerzeit
+  TEK_GESGEW float // gesamtgewicht , Gesamtgewicht [kg]
+  TEK_GESVOL float // gesamtvolumen, Gesamtvolumen [dm³]
+  TEK_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  TEK_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  TEK_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  TEK_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  TEK_PAKETNR string // Paketnummer / generierte Tracking nummer, PaketNr
+  TEK_POS_FELDID string // Feldidentifikationsnummer, Lagerplatz
+  TEK_POS_OFFS_L_X float // offset X der position im Feld, X-Koordinate
+  TEK_POS_OFFS_L_Y float // offset Y der position im Feld, Y-Koordinate
+  TEK_POS_OFFS_L_Z float // offset Z der position im Feld, Z-Koordinate
+  TEK_POS_RAS_R_X float // Raster offset X der position im Feld, X-Koordinate
+  TEK_POS_RAS_R_Y float // Raster offset Y der position im Feld, Y-Koordinate
+  TEK_POS_RAS_R_Z float // Raster offset Z der position im Feld, Z-Koordinate
+  TEK_STAMMTEKZ string // StammTE kennzeichnung, Stamm TE
+  TEK_SUMGEFGUTPUNKTE float // summer der Gefahrgut Punkte, Gefahrgutpunkte
+  TEK_TEID string // Transporteinheitsidentifikationsnummer, TE-Id
+  TEK_TTS_TETID string // Transporteinheit Typ, TE-Typ
+}
+
+Table P_TEP {
+  // Die 'P_TEP' Tabelle beinhaltet Transporteinheit Psotitionsdaten, Transporteinheitsposition_Protokoll_t
+  POSNR float [pk] // Positionsnummer, PosNr
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  TEP_ERSTERFZEIT datetime // erfassungszeit auf der Transporteinheit, Ersterfassungszeit
+  TEP_FACHK string // Fachkennung, Fachkennung
+  TEP_FIFODATUM datetime // Fifo Datum, FIFO-Datum
+  TEP_GESGEW float // Gesamtgewicht der Artikelmenge in kg, Gesamtgewicht [kg]
+  TEP_GESVOL float // Gesamtvolumen der artikelmenge in dm³, Gesamtvolumen [dm³]
+  TEP_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  TEP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  TEP_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  TEP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  TEP_INVZEIT datetime // Inventurzeit, Inventurzeit
+  TEP_MID_AID_ARTNR string // Artikelnummer, Artikelnummer
+  TEP_MID_CHARGE string // charge, Charge
+  TEP_MID_MATQ string // materialqualifikation, Materialqualifikations-Id
+  TEP_MID_MHD datetime // mindesthaltbarkeitsdatum, MHD
+  TEP_MID_RESNR string // reservierungsnummer, Reservierungsnummer
+  TEP_MID_SERIENNRGRP string // seriennummer, Seriennummer
+  TEP_MID_WENR string // Wareneingangsnummer, Wareneingangsnummer
+  TEP_MNGS_GEW float // mengengewicht, Gewicht [kg]
+  TEP_MNGS_GEWBASIS float // basisgewicht des artikels, Gewicht Basis [kg]
+  TEP_MNGS_MNG float // menge, Menge
+  TEP_POSNR float // positionsnummer, PosNr
+  TEP_SUMGEFGUTPUNKTE float // summe der gefahrgutpunkte, Gefahrgutpunkte
+  TEP_TEID string // Transporteinheitidentifikationsnummer, TE-Id
+}
+
+Table P_TOUR {
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTZEIT datetime // protokollzeit, Protokollzeit
+  TOUR_AUSNR string // auftragsnummer, Auftragsnummer
+  TOUR_AUTOTOURKZ string // automatischer tour start J/N, autom. Tour Starten
+  TOUR_AUTOVERPLKZ string // automatische freigabe J/N, autom. Freigabe
+  TOUR_BEREITTERM datetime // bereitstelltermin, Bereitstelltermin
+  TOUR_FERTZEIT datetime // fertigzeit, Fertigzeit
+  TOUR_FORCETOURPERORDERKZ string // tour pro Auftrag zwingend J/N, Tour pro Auftrag zwingend
+  TOUR_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  TOUR_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  TOUR_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  TOUR_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  TOUR_PRIO string // Tour priorität, Priorität
+  TOUR_STARTZEIT datetime // tour startzeitpunkt, Startzeit
+  TOUR_STATUS string // tour status, Status
+  TOUR_TOURID_HOSTTOURKZ string // host tour kennzeichen, Host Tourkennzeichen
+  TOUR_TOURID_INTLFDNR float // tour identifikationsnummer laufende nummer, laufende Nummer
+  TOUR_TOURID_TOURNR string // tour identifikationsnummer laufende nummer, Tournummer
+  TOUR_VAST_VERSANDART string // Versandart, Versandart
+  TOUR_VERLADKZ string // verladekennzeichen, Verladen
+  TOUR_VERLCTRLKZ string // verladekontrollkennzeichen, Verladekontrollauftrag
+  TOUR_VERLCTRLZPKZ string // verladecontrollzeitpunkt kennzeichen, Verladekontrollauftragszeitpunkt
+  TOUR_VERLSUBTEKZ string // verladekontrollkennzeichen sub te genau, Verladekontrolle Sub-TE genau
+}
+
+Table P_TOURP {
+  // Die 'P_TOUR' Tabelle beinhaltet Tour Daten, Tourenposition_Protokoll
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTPOSNR float [pk] // protokoll positionsnummer, PosNr
+  PROTZEIT datetime // protokollzeitpunkt, Protokollzeit
+  TOURP_AAKZ string // arbeitsauftrag durchgeführt J/N, Arbeitsauftrag durchgeführt
+  TOURP_AUSK_AUSID_AUSNR string // auslagerauftrag, Auftragsnummer
+  TOURP_CMD string // Command status, Command
+  TOURP_CORDERTYP string // conveyer auftragstyp, Convey-Auftragstyp
+  TOURP_CSEITENNR float // conveyer auftrag seitennummer, Convey-Seitennummer
+  TOURP_CTANR float // conveyer transportauftragsnummer, Convey-Auftragsnummer
+  TOURP_DIFFCMD string // differenz commando status, Differenz Command
+  TOURP_EINSTRAT_LAGRF string // lagerreihenfolge , Lagerreihenfolge
+  TOURP_FLAG_DRUCK string // druck status kennzeichen, Druck
+  TOURP_FLAG_GESTARTET string // tourposition gestartet kennzeichen, Gestartet
+  TOURP_FLAG_THMERF string // transporthilfsmittel erfassung kennzeichen, THM-Erfassung
+  TOURP_FLAG_TPAAKT string // transportauftrag aktivierung kennzeichen, Transport aktivieren
+  TOURP_GESGEW float // gesamtgewicht, Gesamtgewicht [kg]
+  TOURP_GESVOL float // gesamtvolumen, Gesamtvolumen [dm³]
+  TOURP_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  TOURP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  TOURP_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  TOURP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  TOURP_HOSTSENTKZ string // tourp daten an host gesendet kennzeichen J/N, HostTelegramm gesendet
+  TOURP_KETK_KETID string // Kommissionierketten identifikation, Kette-Id
+  TOURP_KOMENDEKZ string // kommissionierung abgeschlossen kennzeichen J/N, Kommissionierung abgeschlossen
+  TOURP_KOMTEKZ string // Kommssioniertransporteinheit kennzeichen J/N, Kommissionier-TE
+  TOURP_KONMITTOURPNR float // Konsoliedieren mit tourp nummer, Konsol. Tourpositionsnummer
+  TOURP_KONREIFENKARTON_TETID string // Reifenkarton ID für Konsolidierung
+  TOURP_LBKOM_LAGIDKOM string // Start im Lagerbereich kommissionierung, Lagerbereich Kommissionierung
+  TOURP_NACHTEID string // nachfolger für TEID, Nachfolge für TE
+  TOURP_RESTOCKKZ string // Wiedereinlagerungskennzeichen, Wiedereinlagerung
+  TOURP_STATUS string // tourp status, Status
+  TOURP_TECTRLKZ string // TE kontrolliert kennzeichen J/N, TE kontrolliert
+  TOURP_TEK_TEID string // transporteinheitskopfidentifikationsnummer, TE-Id
+  TOURP_TOUR_TOURID_HOSTTOURKZ string // hostkennzeichen, Host Tourkennzeichen
+  TOURP_TOUR_TOURID_INTLFDNR float // laufende nummer der tour identifikation, laufende Nummer
+  TOURP_TOUR_TOURID_TOURNR string // touridentifikationsnummer, Tournummer
+  TOURP_TOURPNR float // tourpositionsnummer, Tourpositionnummer
+  TOURP_TTS_TETID string // transporteinheitstyp, TE-Typ
+  TOURP_VERPACKT string // ware verpackt kennzeichen J/N, Ware wurde verpackt
+  TOURP_VOLLMELDKZ string // Vollgemeldet J/N, Voll gemeldet
+}
+
+Table P_TPA {
+  // Die 'P_TPA' Tabelle beinhaltet Transportauftrag Daten, Protokoll Transportauftrag
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTZEIT datetime // protokollzeit, Protokollzeit
+  TPA_AKTPOS_FELDID string // Aktuell Feldidentifikationsnummer des Transportauftrages, Lagerplatz
+  TPA_AKTPOS_OFFS_L_X float // aktuelle offset X der position im Feld, X-Koordinate
+  TPA_AKTPOS_OFFS_L_Y float // aktuelle offset Y der position im Feld, Y-Koordinate
+  TPA_AKTPOS_OFFS_L_Z float // aktuelle offset Z der position im Feld, Z-Koordinate
+  TPA_AKTPOS_RAS_R_X float // aktuelle Raster offset X der position im Feld, X-Koordinate
+  TPA_AKTPOS_RAS_R_Y float // aktuelle Raster offset Y der position im Feld, Y-Koordinate
+  TPA_AKTPOS_RAS_R_Z float // aktuelleRaster offset Z der position im Feld, Z-Koordinate
+  TPA_AKTRFNR float // aktuelle reihenfolgen nummer, akt. Reihenfolgenummer
+  TPA_AKTUSER string // aktueller user, Aktueller Benutzer
+  TPA_CMD string // transportauftag commando , Kommando
+  TPA_CSEITENNR float // transportauftrag conveyer seitennummer, Convey-Seitennummer
+  TPA_CTANR float // transportauftrag convertransportauftragnummer, Convey-Auftragsnummer
+  TPA_DIRECTOUTID float // direkt out identifikationsnummer
+  TPA_DIRECTOUTPAGEID float // direkt out seite
+  TPA_ERR string // transportauftrag fehlerhaft J/N, Fehlerhafter TPA
+  TPA_ERRNO float // fehlernummer, Fehlernummer
+  TPA_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  TPA_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  TPA_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  TPA_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  TPA_INFOTXT string // Transportauftrag info text, Information
+  TPA_LASTUSER string // letzter user, Letzter Benutzer
+  TPA_NEXT_LPREQID float // lagerplatz anfrage id für nächste position, LP-Request-Id Nextpos
+  TPA_NEXTPOS_FELDID string // Nächste  Positiionsfeldidentifikationsnummer des Transportauftrages, Lagerplatz
+  TPA_NEXTPOS_OFFS_L_X float // offset X der nächste position im Feld, X-Koordinate
+  TPA_NEXTPOS_OFFS_L_Y float // offset Y der nächste position im Feld, Y-Koordinate
+  TPA_NEXTPOS_OFFS_L_Z float // offset Z der nächste position im Feld, Z-Koordinate
+  TPA_NEXTPOS_RAS_R_X float // Raster offset X der nächste position im Feld, X-Koordinate
+  TPA_NOROUTINGTPM string // transportmittelübergabe im routing J/N, Keine Routing Tpm-Übergabe
+  TPA_PRIO string // priorität, Priorität
+  TPA_QUELLPOS_FELDID string // Quellpositiionsfeldidentifikationsnummer des Transportauftrages, Lagerplatz
+  TPA_QUELLPOS_OFFS_L_X float // offset X der quellposition im Feld, X-Koordinate
+  TPA_QUELLPOS_OFFS_L_Y float // offset Y der quellposition im Feld, Y-Koordinate
+  TPA_QUELLPOS_OFFS_L_Z float // offset Z der quellposition im Feld, Z-Koordinate
+  TPA_QUELLPOS_RAS_R_X float // Raster offset X der quellposition im Feld, X-Koordinate
+  TPA_QUELLPOS_RAS_R_Y float // Raster offset Y der quellposition im Feld, Y-Koordinate
+  TPA_QUELLPOS_RAS_R_Z float // Raster offset Z der quellposition im Feld, Z-Koordinate
+  TPA_ROUTINGERFORDERLICH string // routing erforderlich J/N, Routing erforderlich
+  TPA_ROUTINGZEIT datetime // routing zeit, Routingzeit
+  TPA_STARTZEIT datetime // startzeitpunkt des transportauftrages, Startzeit
+  TPA_STATUS string // status , Status
+  TPA_TANR float // transportauftragsnummer, TaNr
+  TPA_TEK_TEID string // transporteinheitnummer, TE-Id
+  TPA_TMSK_TPMID string // transpormittel identifikation, Transportmittel-Id
+  TPA_TPASTARTED string // transportauftrag gestartet J/N, Transport gestartet
+  TPA_TSNR float // transportsecheinnummer, Transportscheinnummer
+  TPA_TTS_TETID string // Transporthilfsmittel identifikation, TE-Typ
+  TPA_ZIEL_LPREQID float // lagerplatz anfrage id für ziel position, LP-Request-Id Ziel
+  TPA_ZIELPOS_FELDID string // Ziellpositiionsfeldidentifikationsnummer des Transportauftrages, Lagerplatz
+  TPA_ZIELPOS_OFFS_L_X float // offset X der zielposition im Feld, X-Koordinate
+  TPA_ZIELPOS_OFFS_L_Y float // offset Y der ziellposition im Feld, Y-Koordinate
+  TPA_ZIELPOS_OFFS_L_Z float // offset Z der ziellposition im Feld, Z-Koordinate
+  TPA_ZIELPOS_RAS_R_X float // Raster offset X der zielposition im Feld, X-Koordinate
+  TPA_ZUGUSER string // zugeteilter benutzer, Zugeteilter Benutzer
+  TPA_ZULAGART string // zulagerart, Zulagerungsart
+  TPA_ZUTEILSPERRE string // zuteilungssperre, Automatische Zuteilung gesperrt
+}
+
+Table P_TPATEP {
+  // Die 'P_TPATEP' Tabelle beinhaltet Transportauftragsdaten einer Transporteinheitsposition, Protokoll Transportauftrag_Transporteinheitposition
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTPOSNR float [pk] // Prottokollpositionsnummer, PosNr
+  PROTZEIT datetime // Protokollzeit, Protokollzeit
+  TEP_ERSTERFZEIT datetime // ersterfassungszeit der Transporteinheit position, Ersterfassungszeit
+  TEP_FACHK string // fachkennung der transporteinheit position, Fachkennung
+  TEP_FIFODATUM datetime // fifo datume der Transporteinheit position, FIFO-Datum
+  TEP_GESGEW float // gesamtgewicht der transporteinheit position, Gesamtgewicht [kg]
+  TEP_GESVOL float // gesamtvolumen der Transporteinheit position, Gesamtvolumen [dm³]
+  TEP_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  TEP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  TEP_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  TEP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  TEP_INVZEIT datetime // inventurzeit der transporteinheit position, Inventurzeit
+  TEP_MID_AID_ARTNR string // artikelnummer, Artikelnummer
+  TEP_MID_CHARGE string // charge, Charge
+  TEP_MID_MATQ string // materialqualifikation, Materialqualifikations-Id
+  TEP_MID_MHD datetime // mindesthaltbarkeitsdatum, MHD
+  TEP_MID_RESNR string // reservierungsnummer, Reservierungsnummer
+  TEP_MID_SERIENNRGRP string // seriennummer, Seriennummer
+  TEP_MID_WENR string // wareneingangsnummer , Wareneingangsnummer
+  TEP_MNGS_GEW float // mengengewicht, Gewicht [kg]
+  TEP_MNGS_GEWBASIS float // masisgewicht der transporteinheit position, Gewicht Basis [kg]
+  TEP_MNGS_MNG float // mengengewicht, Menge
+  TEP_POSNR float // positionsnummer, PosNr
+  TEP_SUMGEFGUTPUNKTE float // summe der gefahrgutpunkte der transporteinheit position, Gefahrgutpunkte
+  TEP_TEID string // transporteinheit identifikationsnummer, TE-Id
+  TPATEKPOSNR float [pk] // postitionsnummer auf der Transporteinheit im transportauftrag, PosNr
+}
+
+Table P_VLOGK {
+  // Die 'P_VLOGK' Tabelle beinhaltet verstandrelevanten Kopf Daten eines Paketes
+  PROTNR float  // Protokollnummer
+  PROTZEIT datetime // Protokollzeit
+  TEID string // Transporteinheitsidentifikationsnummer
+  TOUR string // Tournummer
+  VLOGK_EMPF_ISO string // Empfängerland (ISO)
+  VLOGK_EMPF_ORT string // Empfängerort
+  VLOGK_EMPF_PLZ string // Empfänger Postleitzahl
+  VLOGK_EMPF_STRASSE string // Empfänger Strasse
+  VLOGK_EMPF_TELEFONNR string // Empfänger Telefonnummer
+  VLOGK_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat
+  VLOGK_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde
+  VLOGK_HIST_ANUSER string // User der den Datensatz angelegt hat
+  VLOGK_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde
+  VLOGK_INT_AKTPRINTER string // "Drucker" an dem das Verd´sandlabel gedruckt wurde
+  VLOGK_INT_FELDID string // Versandlinie
+  VLOGK_INT_STATUS string // Paket Status
+  VLOGK_REFERENZNR string [pk]// Transporteinheitsidentifikationsnummer
+  VLOGK_SEND_ARTLADEMITTEL_01 string // Transporteinheit Typ
+  VLOGK_SEND_BREITE float // Breite der Transporteinheit
+  VLOGK_SEND_FRACHTFUEHRER string // Versandart
+  VLOGK_SEND_GEWICHTEINZEL float // Gewicht der Transporteinheit
+  VLOGK_SEND_HILF_01 string // Dateiname Versandlabel
+  VLOGK_SEND_HOEHE float // Höhe der Transporteinheit
+  VLOGK_SEND_IDENT string // Trackingnummer
+  VLOGK_SEND_LAENGE float // Länge der Transporteinheit
+  VLOGK_SEND_REFERENZNR string // Aulagerauftragsnummer
+  VLOGK_SEND_REFERENZNR_08 string // Bereitstellungszeit
+  VLOGK_SEND_REFERENZNR_09 string // Tournummer
+  VLOGK_SEND_REFERENZNR_10 string // Laufende Nummer der Tour
+
+}
+
+Table P_VLOGP {
+  // Die 'P_VLOGP Tabelle beinhaltet verstandrelevanten Positions Daten/ Inhalt/ Artikel eines Paketes
+  POSNR float  // Positionsnummer
+  PROTNR float  // Protokollnummer
+  PROTZEIT datetime // Protokollzeit
+  VLOGP_GG_DET_ANZAHL float // Artikelanzahl Gefahrgut
+  VLOGP_GG_DET_MENGE float // Gefahrgutgewicht
+  VLOGP_GG_DET_VERPACKUNG string // Verpackungsart Gefahrgut
+  VLOGP_GG_DET_VRPSCHLCODE string // Verpackungscode Gefahrgut
+  VLOGP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde
+  VLOGP_HIST_ANUSER string // User der den Datensatz angelegt hat
+  VLOGP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde
+  VLOGP_POSNR float // VLOG Positionsnummer
+  VLOGP_REFERENZNR string [pk]// Transporteinheitsidentifikationsnummer
+  VLOGP_REFERENZNR_05 string // Aulagerauftragsnummer
+  VLOGP_ZOLL_ART_AA_F31_A string // Artikelnummer
+  VLOGP_ZOLL_ART_ANZ float // Zoll Artikelanzahl
+  VLOGP_ZOLL_ART_EINHEIT string // Artikeleinheit
+  VLOGP_ZOLL_ART_INHALT string // Artikelbezeichnung
+  VLOGP_ZOLL_ART_NETTOGEWICHT float // Artikel Nettogewicht
+  VLOGP_ZOLL_POS float // Zoll Positionsnummer
+}
+
+Table P_VPLP {
+  // Die 'P_VPLP' Tabelle beinhaltet Verplanungspositionen für einen Warenausgangsauftrag bzw. kommissionierscheine, Verplanungsposition Protokoll
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTPOSNR float [pk] // protokoll postitionsnummer, PosNr
+  PROTZEIT datetime // protokollzeit, Protokollzeit
+  VPLP_AKTUSER string // aktueller user, Aktueller Benutzer
+  VPLP_AUSP_AUSID_AUSNR string // auslagerauftragsnummer, Auftragsnummer
+  VPLP_AUSP_POSNR float // positionsnummer im  auslagerauftrag, Positionsnummer
+  VPLP_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  VPLP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  VPLP_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  VPLP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  VPLP_IST_TOURPNR float // tourpositionsnummer, Ist Tourpositionsnummer
+  VPLP_ISTMNGS_GEW float // ist mengen gewicht, Gewicht [kg]
+  VPLP_ISTMNGS_GEWBASIS float // ist basisgewicht, Gewicht Basis [kg]
+  VPLP_ISTMNGS_MNG float // ist menge, Menge
+  VPLP_KOMPOS_FELDID string // Feldpositionsnummer von der Kommissioniert werden soll, Lagerplatz
+  VPLP_KOMPOS_OFFS_L_X float // offset x der kommissionier position in feld, X-Koordinate
+  VPLP_KOMRFNR float // kommissionierreihenfolgenummer, Reihenfolgenummer
+  VPLP_KOMZ_ARTKOMGRPID string // artikelkommissionierstrategie, Artikelkommissionierstrategie
+  VPLP_KOMZ_FELDKOMGRPID string // feldgruppe, Feldgruppe
+  VPLP_KOMZ_LVSMATQID string // materialqualifikationsnummer, LVS Materialqualifikation-Id
+  VPLP_LBKOM_LAGIDKOM string // lagerbereichkommissionierung, Lagerbereich Kommissionierung
+  VPLP_MID_AID_ARTNR string // artikelnummer, Artikelnummer
+  VPLP_MID_MATQ string // materialqualifikationsnummer, Materialqualifikations-Id
+  VPLP_NACHVERPL string // nachverplanen J/N, Nachverplanen
+  VPLP_PICKFERTZEIT datetime // pick fertig zeit, Fertigzeit
+  VPLP_PICKMODE string // kommissionierart, Kommissionierart
+  VPLP_PICKSTARTZEIT datetime // pick start zeit, Startzeit
+  VPLP_PICKUSER string // pick user, Kommissionierer
+  VPLP_QUELLTEP_POSNR float // quellpositionsnummer der transporteinheit position, Quell TE-Id
+  VPLP_QUELLTEP_TEID string // quell teid, Quell TE-Id
+  VPLP_SOLL_TOURPNR float // soll tourpositionsnummer, Soll Tourpositionsnummer
+  VPLP_SOLLMNGS_GEW float // soll mengengewicht, Gewicht [kg]
+  VPLP_SOLLMNGS_GEWBASIS float // soll basisgewicht, Gewicht Basis [kg]
+  VPLP_SOLLMNGS_MNG float // soll mengengewicht, Menge
+  VPLP_STATUS string // status, Status
+  VPLP_TPMID string // ist transportmittel id, Ist-Transportmittel
+  VPLP_URSOLLMNGS_GEW float // ursoll mengen gewicht, Gewicht [kg]
+  VPLP_URSOLLMNGS_GEWBASIS float // ursoll basisgewicht, Gewicht Basis [kg]
+  VPLP_URSOLLMNGS_MNG float // ursoll menge, Menge
+  VPLP_VPLK_KSNR float // kommissinierschein nummer, Kommissionierauftragsnummer
+  VPLP_VPLNR float // verplanungsnummer, Verplanungsnummer
+  VPLP_ZIELTEK_TEID string // ziel transporteinheit identifikationsnummer, Ziel TE-Id
+  VPLP_ZIELTEP_POSNR float // ziel transporteinheit positionsnummer, Ziel TE-Id
+  VPLP_ZIELTEP_TEID string // ziel transporteiheit identifikationsnummer, Ziel TE-Id
+}
+
+Table P_WEVK {
+  // Die 'P_WEVK' Tabelle beinhaltet Vorgangskopf Daten für den Wareneingang, PROT_WEVK
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTZEIT datetime // protokollzeit, Protokollzeit
+  WEVK_ACTIVATIONTIME datetime // aktivierungs zeit, Aktivierungszeit
+  WEVK_ACTIVATIONUSER string // aktivierungs user, Aktiviert von
+  WEVK_ANFERTZEIT datetime // annahme fertig zeit, Annahme Fertigzeit
+  WEVK_ANLEGKZ string // vorgang anlegen kennzeichen, Anlegen Kz
+  WEVK_ANMZEIT datetime // anmelde zeit, Anmeldezeit
+  WEVK_ANZPOS float // anzahl positionen, Anzahl Positionen
+  WEVK_ANZSTDLE float // anzahl ladeeinheiten, Anzahl Ladeeinheiten
+  WEVK_ANZTE float // anzahl transporteinheiten, Anzahl TEs
+  WEVK_BEARBKZ string // bearbeitungs kennzeichen, Bearbeiten Kz
+  WEVK_EXTREF string // externe referenz, Externe Referenz
+  WEVK_FERTZEIT datetime // fertig zeit, Fertigzeit
+  WEVK_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  WEVK_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  WEVK_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  WEVK_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  WEVK_INFO2WAMAS string // info an wamas, Information für Wamas
+  WEVK_LIEFTERM datetime // liefertermin, Liefertermin
+  WEVK_PIEPERNR string // pieper nummer, Piepernummer
+  WEVK_RET_TOR string // retouren tor, Retoure-Tor
+  WEVK_RETFLAECHE_FELDID string // retouren fläche, Lagerplatz
+  WEVK_SPEDADRS_ADR string // speditoer adresse, Adresse
+  WEVK_SPEDADRS_ADR2 string // speditoer adresse 2, Adresse 2
+  WEVK_SPEDADRS_ANREDE string // speditoer anrede, Anrede
+  WEVK_SPEDADRS_EMAIL string // speditoer email, e-mail
+  WEVK_SPEDADRS_FAX string // speditoer fax, Faxnummer
+  WEVK_SPEDADRS_LAND string // speditoer land, Land
+  WEVK_SPEDADRS_NAME string // speditoer name, Name
+  WEVK_SPEDADRS_NAME2 string // speditoer name 2, Name 2
+  WEVK_SPEDADRS_NAME3 string // speditoer name 3, Name 3
+  WEVK_SPEDADRS_NAME4 string // speditoer name 4, Name 4
+  WEVK_SPEDADRS_ORT string // speditoer ort, Ort
+  WEVK_SPEDADRS_ORTTEIL string // speditoer ortsteil, Ortsteil
+  WEVK_SPEDADRS_PLZ string // speditoer postleitzahl, Postleitzahl
+  WEVK_SPEDADRS_TEL string // speditoer telefonnummer, Telefon
+  WEVK_SPEDADRS_WWW string // speditoer homepage, Homepage
+  WEVK_SPEDMAND string // speditoer mandant, Spediteurmandant
+  WEVK_SPEDNR string // speditoer nummer, Spediteurnummer
+  WEVK_STARTZEIT datetime // startzeit, Startzeit
+  WEVK_STATUS string // status, Status
+  WEVK_THMFLAECHE_FELDID string // transporhilfsmittel flächen id, Lagerplatz
+  WEVK_WE_TOR string // wareneingangtor, WE-Tor
+  WEVK_WEFLAECHE_FELDID string // wareneingangsfläche feldidentifikation, Lagerplatz
+  WEVK_WEVID_WEVNR string // wareneingang vorgangsnummer, WE-Vorgangsnummer
+  WEVK_WEVTYP_TYP string // wareneingang vorgangstyp, WE-Vorgangstyp
+}
+
+Table P_WEVP {
+  // Die 'P_WEVP' Tabelle beinhaltet Vorgangspositions Daten für den Wareneingang, PROT_WEVP
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTPOSNR float [pk] // protokoll positionsnummer, PosNr
+  WEVP_ANMMNGS_GEW float // anmeldemengen gewicht, Gewicht [kg]
+  WEVP_ANMMNGS_GEWBASIS float // basisgewicht, Gewicht Basis [kg]
+  WEVP_ANMMNGS_MNG float // anmeldemenge , Menge
+  WEVP_ANZTE float // anzahl transporteinheiten, Anzahl TEs
+  WEVP_BEARBKZ string // bearbeitungskennzeichen, Bearbeitungs Kz
+  WEVP_EXTREF string // externe referenz, Externe Referenz
+  WEVP_GESGEW float // gesamt gewicht, Gesamtgewicht
+  WEVP_HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  WEVP_HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  WEVP_HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  WEVP_HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  WEVP_KATEGORIE string // wareneingangskategorie, WE-Kategorie
+  WEVP_LIEFARTNR string // lieferanten Artikelnummer, Lieferantenartikelnr.
+  WEVP_LIEFMNGS_GEW float // gelieferte mengengewicht, Gewicht [kg]
+  WEVP_LIEFMNGS_GEWBASIS float // gelieferte basisgewicht, Gewicht Basis [kg]
+  WEVP_LIEFMNGS_MNG float // gelieferte mengengewicht, Menge
+  WEVP_LIEFSDATUM datetime // lieferdatum, Lieferscheindatum
+  WEVP_LIEFSNR string // lieferscheinnummer, Lieferscheinnummer
+  WEVP_LST_LIEFNR string // lieferantennummer, Lieferantennummer
+  WEVP_LST_MAND string // lieferant mandant, Mand.Lieferant
+  WEVP_MID_AID_ARTNR string // artikelnummer, Artikelnummer
+  WEVP_MID_AID_AUSPR float // ausprägung, Ausprägung
+  WEVP_MID_AID_MAND string // mandant, Mandant
+  WEVP_MID_AID_VAR string // variante, Variante
+  WEVP_MID_CHARGE string // charge, Charge
+  WEVP_MID_MATQ string // materialqualifikation, Materialqualifikations-Id
+  WEVP_MID_MHD datetime // mindesthaltbarkeitsdatum, MHD
+  WEVP_MID_RESNR string // reservierungsnummer, Reservierungsnummer
+  WEVP_MID_WENR string // wareneingangsnummer, Wareneingangsnummer
+  WEVP_POSENDE string // position abgeschlossen J/N, Position abgeschlossen
+  WEVP_POSNR float // positionsnummer, PosNr
+  WEVP_STATUS string // status, Status
+  WEVP_WEAP_POSNR float // wareneingangs avis positionsnummer, WE-Avispos.nummer
+  WEVP_WEAP_WEAID_WEANR string // wareneingangs avis nummer, WE-Avisnummer
+  WEVP_WEVID_WEVNR string // wareneingang vorgangsnummer, WE-Vorgangsnummer
+
+}
+
+Table P_ZAP {
+  // Die 'P_ZAP' Tabelle beinhaltet Zu und Abbuchungen einer Transporteinheit, Zu_Abgangsprotokoll
+  AKTPOS_FELDID string // Feldidentifikationsnummer , Lagerplatz
+  AKTPOS_OFFS_L_X float // offset X der position im Feld, X-Koordinate
+  AKTPOS_OFFS_L_Y float // offset Y der position im Feld, Y-Koordinate
+  AKTPOS_OFFS_L_Z float // offset Z der position im Feld, Z-Koordinate
+  AKTPOS_RAS_R_X float // Raster offset X der position im Feld, X-Koordinate
+  AKTPOS_RAS_R_Y float // Raster offset Y der position im Feld, Y-Koordinate
+  AKTPOS_RAS_R_Z float // Raster offset Z der position im Feld, Z-Koordinate
+  ARCHIVZEIT datetime // archivzeit, Archivierungsdauer
+  AUSID_AUSNR string // auslagerauftrag nummer, Auftragsnummer
+  GEW float // gewicht, Differenzgewicht[kg]
+  KRETID_KRETNR string // Kundenretouren nummer, Kundenretourennummer
+  KST_KUNR string // Kundennummer, Kundennummer
+  LST_LIEFNR string // Lieferantennummer, Lieferantennummer
+  MID_AID_ARTNR string // artikelnummer, Artikelnummer
+  MID_CHARGE string // charge, Charge
+  MID_MATQ string // materialqualifikation, Materialqualifikations-Id
+  MID_MHD datetime // Mindesthaltbarkeitsdatum, MHD
+  MID_RESNR string // reservenummer, Reservierungsnummer
+  MID_SERIENNRGRP string // seriennummer, Seriennummer
+  MID_WENR string // wareneingangsnummer, Wareneingangsnummer
+  MNG float // menge, Differenzmenge
+  POSNR float // positionsnummer, PosNr
+  PROTNR float [pk] // Protokollnummer, Protokollnummer
+  PROTUSER string // protokolluser, Benutzer
+  PROTZEIT datetime // protokollzeit, Protokollzeit
+  TEID string // Transporteinheit identifikationsnummer, TE-Id
+  UCTYP string // anwendungsfallidentifikationskennzeichen, Typ
+  WEAID_WEANR string // wareneingangsavisnummer, WE-Avisnummer
+  ZIELPOSNR float // zielpositionsnummer, PosNr
+  ZIELTEID string // zeil Transporteinheitsnummer, TE-Id
+}
+
+Table THM {
+  // Die 'THM' Tabelle beinhaltet WAMAS relevante Stammdaten zu Transporthilfsmitteln, Transporthilfsmittel
+  BEZ string // Bezeichung, Bezeichnung
+  GANZTEKZ string // Ganz-TE-Kennzeichen, Ganz-TE fähig
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  SATZKZ string // Datensatzkennzeichen, Satzkennzeichen
+  TARAGEW float // Tara Gewicht der Transporteinheit / Kartons, Taragewicht [kg]
+  THMID string [pk] // Transporthilfsmittel Type, Transporthilfsmittel
+  THMIDKQUITT string // Kurzquittierungs-Code, Kurzquittierungs-Code
+  ART_AID_ARTNR string // Artikelnummer
+  ART_AID_VAR string // Variante
+  ART_AID_AUSPR float // Ausprägung
+  ART_AID_MAND string // Mandant
+}
+
+Table VAST {
+  // Die 'VAST' Tabelle beinhaltet WAMAS relevante Stammdaten zu Versandart, Versandartenstamm
+  AUTOVERDICHTKZ string // , Auto. Verdichten
+  BEZ string // Bezeichnung, Bezeichnung
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat, geändert von
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde, Änderungszeit
+  HIST_ANUSER string // User der den Datensatz angelegt hat, angelegt von
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde, Anlegezeit
+  MAXGEW float // max. Gewicht [kg] pro Transporteinheit, max. Gewicht [kg] pro Transporteinheit
+  MAXGEWGEFGUT float // max. Gefahrgutgewicht [kg] pro Transporteinheit
+  MAXVOL float // max. Volumen [dm3] pro Transporteinheit, max. Volumen [dm3] pro Transporteinheit
+  PAKETKZ string // Paketnummer erforderlich, Paketnummer erforderlich
+  REIFENVPART string // Reifen-Verpackungsart, Reifen-Verpackungsart
+  SATZKZ string // Datensatzkennzeichen, Satzkennzeichen
+  SKIPVLOG string // VLOG überspringen
+  STDVERSKZ string // Standard Versandart, Standard Versandart
+  TUINTUNOMOT string // TE in TE ohne THM erlauben, TE in TE ohne THM erlauben
+  TUINTUWITHMOT string // TE in TE mit THM erlauben, TE in TE mit THM erlauben
+  TUONTUNOMOT string // TE auf TE ohne THM erlauben, TE auf TE ohne THM erlauben
+  TUONTUWITHMOT string // TE auf TE mit THM erlauben, TE auf TE mit THM erlauben
+  VERSANDART string [pk] // Versandart, Versandart
+  VERSANDARTTTSKZ string // Versandart TE-Typenstamm beim verplanen
+  VERSETIKETTTPOLAY string // Layout Versandetikett Transport, Layout Versandetikett Transport
+}
+
+Table VASTTTS {
+  // Die 'VASTTTS' Tabelle beinhaltet WAMAS relevante Stammdaten zur Versandart zugewiesenen Transporteinheittypen ( Versandkartons)
+  HIST_AEUSER string // User der den Datensatz zu letzt geändert hat
+  HIST_AEZEIT datetime // Zeitstempel an dem der Datensatz zuletzt geändert wurde
+  HIST_ANUSER string // User der den Datensatz angelegt hat
+  HIST_ANZEIT datetime // Zeitstempel an dem der Datensatz erzeugt wurde
+  MAXLADEGEW float // max. Gewicht [kg] pro Transporteinheit
+  REIFENVPART string [pk] // Art der Verpackung, Karton oder Lose verpackt
+  TETID string [pk] // TE-Type (Transporteinheit-Type)
+  VERSANDART string [pk] // Versandart
+}
+//ART.REF
+Ref: ART.THM_THMID > THM.THMID
+Ref: ARTE.(AID_ARTNR) > P_VPLP.(VPLP_MID_AID_ARTNR)
+Ref: ART.(AID_ARTNR) > P_AUSP.(AUSP_MID_AID_ARTNR)
+Ref: ART.(AID_ARTNR ) > P_TEP.(TEP_MID_AID_ARTNR  )
+Ref: ART.(AID_ARTNR) > P_WEVP.(WEVP_MID_AID_ARTNR)
+Ref: P_ZAP.MID_AID_ARTNR > ART.AID_ARTNR
+Ref: ARTE.AID_ARTNR > ART.AID_ARTNR
+Ref: ARTEAN.AID_ARTNR > ART.AID_ARTNR
+Ref: ARTWFL.AID_ARTNR > ART.AID_ARTNR
+Ref: THM.ART_AID_ARTNR > ART.AID_ARTNR
+Ref: ART. ALTAID_ARTNR > P_VLOGP.VLOGP_ZOLL_ART_AA_F31_A
+// LP.REF
+Ref: FESP.FELDID > FES.FELDID
+Ref: FESP.(FELDID, OFFS_L_X) > P_TEK.(TEK_POS_FELDID,TEK_POS_OFFS_L_X)
+Ref: FESP.(FELDID, OFFS_L_X) > FFE.(POS_FELDID,POS_OFFS_L_X)
+Ref: FESP.(FELDID, OFFS_L_X) > FSP.(POS_FELDID,POS_OFFS_L_X)
+
+
+Ref: VASTTTS.VERSANDART > VAST.VERSANDART
+Ref: P_AUSK.(AUSK_AUSID_AUSNR) > P_AUSP.(AUSP_AUSID_AUSNR)
+Ref: P_AUSP.(AUSP_AUSID_AUSNR) > P_VPLP.(VPLP_AUSP_AUSID_AUSNR)
+Ref: P_TEK.TEK_TEID > P_TEP.TEP_TEID
+Ref: P_TEK.TEK_TEID > P_TPA.TPA_TEK_TEID
+Ref: P_TOUR.(TOUR_TOURID_TOURNR, TOUR_TOURID_INTLFDNR) > P_TOURP.(TOURP_TOURPNR, TOURP_TOUR_TOURID_INTLFDNR)
+Ref: P_TOURP.TOURP_TOURPNR > P_VPLP.VPLP_IST_TOURPNR
+Ref: P_VLOGK.VLOGK_REFERENZNR > P_VLOGP.VLOGP_REFERENZNR
+Ref: VAST.VERSANDART > P_TOUR.TOUR_VAST_VERSANDART
+Ref: P_TEK.TEK_TEID > P_TOURP.TOURP_TEK_TEID
+Ref: P_TOUR.(TOUR_TOURID_TOURNR,TOUR_TOURID_INTLFDNR) > P_TOURP.(TOURP_TOUR_TOURID_TOURNR,TOURP_TOUR_TOURID_INTLFDNR)
+Ref: P_TOURP.TOURP_TOURPNR > P_VPLP.VPLP_SOLL_TOURPNR
+Ref: P_TEK.TEK_TEID > P_VPLP.VPLP_ZIELTEK_TEID
+Ref: P_VPLP.(VPLP_ZIELTEP_TEID ,VPLP_ZIELTEP_POSNR) > P_TEP.(TEP_TEID ,POSNR )
+Ref: VAST.VERSANDART > P_AUSK.AUSK_VAST_VERSANDART
+Ref: P_AUSK.(AUSK_AUSID_AUSNR) > P_TOURP.(TOURP_AUSK_AUSID_AUSNR)
+Ref: P_AUSK.(AUSK_AUSID_AUSNR) > P_AUSKI.(AUSKI_AUSID_AUSNR)
+Ref: P_VPLP.(VPLP_AUSP_AUSID_AUSNR,VPLP_AUSP_POSNR) > P_AUSP.(AUSP_AUSID_AUSNR ,AUSP_POSNR)
+Ref: P_AUSK.AUSK_KITAID_ARTNR > ART.AID_ARTNR
+
+Ref: FESP.(FELDID, OFFS_L_X ) > P_TPA.(TPA_AKTPOS_OFFS_L_X, TPA_AKTPOS_FELDID)
+Ref: FESP.(FELDID, OFFS_L_X ) > P_TPA.(TPA_NEXTPOS_FELDID, TPA_NEXTPOS_OFFS_L_X)
+Ref: FESP.(FELDID, OFFS_L_X ) > P_TPA.(TPA_QUELLPOS_FELDID, TPA_QUELLPOS_OFFS_L_X)
+Ref: FESP.(FELDID, OFFS_L_X ) > P_TPA.(TPA_ZIELPOS_FELDID, TPA_ZIELPOS_OFFS_L_X)
+
+
+
+Ref: FESP.(FELDID, OFFS_L_X) > P_VPLP.(VPLP_KOMPOS_FELDID, VPLP_KOMPOS_OFFS_L_X)
+Ref: P_TEP.(TEP_TEID ,TEP_POSNR) > P_VPLP.(VPLP_ZIELTEP_TEID ,VPLP_ZIELTEP_POSNR)
+Ref: FES.FELDID > P_WEVK.WEVK_WEFLAECHE_FELDID
+Ref: FES.FELDID > P_WEVK.WEVK_RETFLAECHE_FELDID
+Ref: FES.FELDID > P_WEVK.WEVK_THMFLAECHE_FELDID
+
+Ref: P_WEVP.(WEVP_WEVID_WEVNR) > P_WEVK.(WEVK_WEVID_WEVNR)
+
+Ref: P_ZAP.AUSID_AUSNR > P_AUSP.AUSP_AUSID_AUSNR
+Ref: P_ZAP.TEID > P_TEK.TEK_TTS_TETID
+Ref: P_VLOGK.TEID >P_TOURP.TOURP_TEK_TEID
+Ref: P_VLOGK.TEID >P_TEK.TEK_TEID
+Ref: P_VLOGK.TEID >P_TEP.TEP_TEID
+
+Ref: P_TPATEP.TEP_TEID > P_TPA.TPA_TEK_TEID
+Ref: P_TPATEP.(TEP_TEID,TEP_POSNR) > P_TEP.(TEP_TEID,POSNR)

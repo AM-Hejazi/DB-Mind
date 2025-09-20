@@ -1,0 +1,323 @@
+[
+  {
+    "table": "equipment",
+    "description": "Registered machines/components and their metadata",
+    "columns": [
+      {
+        "name": "equipment_id",
+        "type": "integer",
+        "description": "Unique identifier for each equipment",
+        "is_primary_key": true,
+        "samples": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Name of the equipment",
+        "samples": [
+          "Hydraulic Pump A",
+          "Compressor B"
+        ]
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "description": "Type/category of equipment",
+        "samples": [
+          "Hydraulic",
+          "Pneumatic"
+        ]
+      },
+      {
+        "name": "location",
+        "type": "text",
+        "description": "Physical or operational location of the equipment",
+        "samples": [
+          "Plant 1",
+          "Plant 2"
+        ]
+      },
+      {
+        "name": "install_date",
+        "type": "date",
+        "description": "Date the equipment was installed",
+        "samples": [
+          "2020-03-01",
+          "2021-06-15"
+        ]
+      }
+    ]
+  },
+  {
+    "table": "sensor_data",
+    "description": "Time-stamped sensor measurements from equipment",
+    "columns": [
+      {
+        "name": "sensor_id",
+        "type": "integer",
+        "description": "Unique identifier of the sensor reading",
+        "is_primary_key": true,
+        "samples": [
+          101,
+          102
+        ]
+      },
+      {
+        "name": "equipment_id",
+        "type": "integer",
+        "description": "Foreign key referencing the equipment",
+        "samples": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "timestamp",
+        "type": "datetime",
+        "description": "Time of the sensor reading",
+        "samples": [
+          "2023-09-01T08:00:00",
+          "2023-09-01T09:00:00"
+        ]
+      },
+      {
+        "name": "temperature",
+        "type": "real",
+        "description": "Temperature recorded by sensor (in Celsius)",
+        "samples": [
+          75.2,
+          80.5
+        ]
+      },
+      {
+        "name": "vibration",
+        "type": "real",
+        "description": "Vibration level recorded (in mm/s)",
+        "samples": [
+          0.12,
+          0.15
+        ]
+      },
+      {
+        "name": "pressure",
+        "type": "real",
+        "description": "Pressure measured by the sensor (in bar)",
+        "samples": [
+          5.8,
+          6.0
+        ]
+      }
+    ]
+  },
+  {
+    "table": "maintenance_logs",
+    "description": "Log of maintenance tasks performed on equipment",
+    "columns": [
+      {
+        "name": "log_id",
+        "type": "integer",
+        "description": "Primary ID for the maintenance log",
+        "is_primary_key": true,
+        "samples": [
+          201,
+          202
+        ]
+      },
+      {
+        "name": "equipment_id",
+        "type": "integer",
+        "description": "Equipment receiving the maintenance",
+        "samples": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "technician_id",
+        "type": "integer",
+        "description": "Technician responsible for the maintenance",
+        "samples": [
+          301,
+          302
+        ]
+      },
+      {
+        "name": "maintenance_date",
+        "type": "date",
+        "description": "Date the maintenance was performed",
+        "samples": [
+          "2023-07-15",
+          "2023-08-20"
+        ]
+      },
+      {
+        "name": "maintenance_type",
+        "type": "text",
+        "description": "Type of maintenance: preventive, corrective, etc.",
+        "samples": [
+          "Preventive",
+          "Corrective"
+        ]
+      },
+      {
+        "name": "downtime_hours",
+        "type": "real",
+        "description": "Downtime duration caused by maintenance (in hours)",
+        "samples": [
+          2.5,
+          4.0
+        ]
+      },
+      {
+        "name": "cost",
+        "type": "real",
+        "description": "Cost of the maintenance operation (in EUR)",
+        "samples": [
+          120.5,
+          300.0
+        ]
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "description": "Optional notes about the operation",
+        "samples": [
+          "Routine checkup",
+          "Replaced faulty valve"
+        ]
+      }
+    ]
+  },
+  {
+    "table": "failure_events",
+    "description": "Failures detected in equipment operations",
+    "columns": [
+      {
+        "name": "failure_id",
+        "type": "integer",
+        "description": "Unique ID of the failure",
+        "is_primary_key": true,
+        "samples": [
+          401,
+          402
+        ]
+      },
+      {
+        "name": "equipment_id",
+        "type": "integer",
+        "description": "Affected equipment",
+        "samples": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "failure_type",
+        "type": "text",
+        "description": "Type of failure (mechanical, electrical, etc.)",
+        "samples": [
+          "Mechanical",
+          "Electrical"
+        ]
+      },
+      {
+        "name": "timestamp",
+        "type": "datetime",
+        "description": "Time of failure occurrence",
+        "samples": [
+          "2023-06-10T10:30:00",
+          "2023-08-01T14:45:00"
+        ]
+      },
+      {
+        "name": "severity",
+        "type": "text",
+        "description": "Severity level: low, medium, high, critical",
+        "samples": [
+          "medium",
+          "high"
+        ]
+      }
+    ]
+  },
+  {
+    "table": "technician",
+    "description": "List of maintenance technicians",
+    "columns": [
+      {
+        "name": "technician_id",
+        "type": "integer",
+        "description": "Technician unique ID",
+        "is_primary_key": true,
+        "samples": [
+          301,
+          302
+        ]
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Full name of technician",
+        "samples": [
+          "Alice Becker",
+          "John Schmidt"
+        ]
+      },
+      {
+        "name": "specialization",
+        "type": "text",
+        "description": "Main area of expertise",
+        "samples": [
+          "Hydraulics",
+          "Electrical systems"
+        ]
+      }
+    ]
+  },
+  {
+    "table": "maintenance_plan",
+    "description": "Future scheduled maintenance actions",
+    "columns": [
+      {
+        "name": "plan_id",
+        "type": "integer",
+        "description": "ID of the plan",
+        "is_primary_key": true,
+        "samples": [
+          501,
+          502
+        ]
+      },
+      {
+        "name": "equipment_id",
+        "type": "integer",
+        "description": "Targeted equipment",
+        "samples": [
+          1,
+          2
+        ]
+      },
+      {
+        "name": "planned_date",
+        "type": "date",
+        "description": "Scheduled date of maintenance",
+        "samples": [
+          "2023-10-01",
+          "2023-10-15"
+        ]
+      },
+      {
+        "name": "maintenance_type",
+        "type": "text",
+        "description": "Type of scheduled maintenance",
+        "samples": [
+          "Inspection",
+          "Oil Change"
+        ]
+      }
+    ]
+  }
+]

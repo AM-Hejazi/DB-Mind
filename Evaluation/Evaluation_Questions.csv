@@ -1,0 +1,31 @@
+By,Category,Complexity,Question
+GPT,Inventory / Stock,Simple,How many SKUs are currently in stock?
+GPT,Inventory / Stock,Simple,How many pallet places are currently occupied?
+GPT,Master-/Reference + Audit,Simple,List the manufacturers who supplied more than 10 unique items.
+GPT,Orders / Fulfilment,Simple,How many orders are currently in processing status?
+GPT,Storage / Items,Simple,How many different item groups are currently available in the warehouse?
+GPT,Storage / Items,Simple,How many items were created during June 2025?
+GPT,Transport / Shipping,Simple,How many different transport unit types were used in the past 30 days?
+Joachim,Storage/Items,Simple,"what is the total item volume of items in stock currently, measured in cubic meters"
+Ralf,Storage/Items,Simple,How many chain kits were created in May 2025? Wie viele Chain Kits wurden im Mai 2025 erstellt?
+Wilhelm,Transport / Shipping,Simple,How may different Transport unit Types where shipped Last week?
+GPT,Inventory / Stock,Medium,List all stock records where the available quantity is less than 10 units.
+GPT,Inventory / Stock,Medium,What is the average stock level per item group in the past month?
+GPT,Master-/Reference + Audit,Medium,What is the average time between item creation and first audit log entry?
+GPT,Storage / Items,Medium,What is the total item volume -in cubic meters- for all available items?
+GPT,Transport / Shipping,Medium,How many TEK entries had a fillrate below 50 percents last week?
+GPT,Transport / Shipping,Medium,Which day last week had the highest number of outbound transport units?
+Joachim,Transport / Shipping,Medium,"create me list with all countries were we had orders in the last 30 days ship to, and count all shipments per shipment service."
+Ralf,Orders / Fulfilment,Medium,How many tires were shipped in May 2025? Wie viele Reifen wurden im Mai 2025 verschickt?
+Wilhelm,Inventory / Stock,Medium,"How often was an ordered quantity split across different shipping boxes, and into how many boxes on average -in the last 6 month-?"
+Wilhelm,Transport / Shipping,Medium,How many different Transport unit Types where shipped last week and what is the their fillrate index?
+GPT,Inventory / Stock,Difficult,What is the most common reason for stock corrections in the last 3 months?
+GPT,Master-/Reference + Audit,Difficult,Which users triggered the highest number of changes in audit logs last month?
+GPT,Orders / Fulfilment,Difficult,What is the median duration of the fulfillment process from picking to dispatch?
+GPT,Storage / Items,Difficult,Which item group had the highest number of articles stored across all warehouses?
+GPT,Storage / Items,Difficult,What is the most common workflow assigned to articles that were created this year?
+GPT,Transport / Shipping,Difficult,Which carrier transported the highest total weight in hazardous shipments this year?
+Joachim,Orders / Fulfilment,Difficult,"During goods-out order fulfillment in the warehouse over the past month, which station, area, or activity took the longest average time per order ó and how many minutes was that on average?"
+Ralf,Transport / Shipping,Difficult,"How many packages containing both tires and hazardous materials were shipped to France in May 2025? Wie viele Packst√ºcke die Reifen und Gefahrgut enthalten, wurden im Mai 2025 nach Frankreich verschickt."
+Wilhelm,Orders / Fulfilment,Difficult,Which product group is shipped the most to each country in the last year? Rank by country.
+Wilhelm,Transport / Shipping,Difficult,"How many different Transport unit Types where shipped last week, what is their fillrate index and how much tara weight was it in total."
