@@ -12,4 +12,14 @@ demo = build_demo()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
-    demo.launch(server_name="0.0.0.0", server_port=port, share=True, show_api=False, max_threads=1)
+    launch_kwargs = {
+        "show_api": False,
+        "max_threads": 1,
+    }
+
+    if os.environ.get("SPACE_ID"):
+        launch_kwargs.update(server_name="0.0.0.0", server_port=port)
+    else:
+        launch_kwargs.update(server_name="127.0.0.1", server_port=port, share=True, favicon_path="data/icon.png")
+
+    demo.launch(**launch_kwargs)
