@@ -12,4 +12,4 @@ demo = build_demo()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
-    demo.launch(server_name="0.0.0.0", server_port=port, share=False, show_api=False, max_threads=1)
+    demo.launch(server_name="0.0.0.0", server_port=port, share=True, show_api=False, max_threads=1)
