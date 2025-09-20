@@ -1,3 +1,14 @@
+﻿---
+title: DB-Mind Assistant
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "4.44.0"
+app_file: app.py
+pinned: false
+---
+
 # DB-Mind
 
 V1.2 demo: A multi agent AI chatbot for SQL querying.
