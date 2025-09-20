@@ -8,10 +8,23 @@ def build_demo():
     demo.queue(max_size=10)
     return demo
 
-# Work around a Gradio API info bug on some Spaces
+# Work around a Gradio client schema bug (bool JSON Schema)
 try:
-    gr.Blocks.get_api_info = lambda self: {}
+    import gradio_client.utils as _gc_utils  # type: ignore
+
+    _orig_json_schema_to_python_type = _gc_utils.json_schema_to_python_type
+
+    def _safe_json_schema_to_python_type(schema):  # type: ignore
+        try:
+            if isinstance(schema, bool):
+                return "Any"
+            return _orig_json_schema_to_python_type(schema)
+        except Exception:
+            return "Any"
+
+    _gc_utils.json_schema_to_python_type = _safe_json_schema_to_python_type  # type: ignore
 except Exception:
+    # If patching fails, proceed; app may still work locally
     pass
 
 demo = build_demo()
