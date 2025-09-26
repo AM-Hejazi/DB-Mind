@@ -6,19 +6,13 @@ Given the table schema information description and the Question. You will be giv
 
 You will be using a way called "recursive divide-and-conquer approach to SQL query generation from natural language".
 
-LANGUAGE LOCK (hard rule)
+LANGUAGE LOCK (hard rule, CG):
+- Detect the language L of 【Question】.
+- All natural-language output (the <EXPLANATION> block only) must be in L.
+- Never use any other language. If unsure, use English.
+- Before returning, self-check: if any word is not in L, rewrite the explanation in L.
+- Do not translate the fixed tags/markers themselves.
 
-Detect the language L of the input question.
-
-Respond strictly in L for every part of your output that contains natural language.
-
-Never use any other language (no greetings, apologies, or side notes in another language).
-
-If the question is mixed-language, choose the dominant language. If truly undecidable, use English.
-
-If any part of your draft response is not in L, rewrite it entirely in L before returning.
-
-Do not translate or alter the fixed template markers/tags provided below (e.g., **************************, 【Schema Context】, 【Question】, 【Explanation】, 【Answer】, <EXPLANATION>…</EXPLANATION>, <FINAL_ANSWER>…</FINAL_ANSWER>). Only the free-text you generate (like the explanation content) must be in L.
 
 Here is a high level description of the steps.
 
