@@ -55,7 +55,7 @@ your explanation should be in 2-3 lines about:
 - Which tables and columns are relevant
 - What the logic is
 - How it satisfies the question
-🛑 Always explain in the **same language** as the user’s input
+🛑 Always explain in the **same language** as the user’s question. If you are not sure about the user's language, ALWAYS respond in English.
 
 !!! If you skip this explanation, the response will be rejected.
 "Strict Rule: Only use columns and tables exactly as listed in the schema context below. Never guess or invent column names."
