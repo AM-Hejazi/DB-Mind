@@ -244,9 +244,9 @@ def format_schema_block(schema_json_subset: Dict) -> str:
 def generate_sql_query(final_question: str, selected_schema: Dict | list | str, complexity: str) -> str:
     selected_schema = _coerce_selected(selected_schema)
     if complexity == "Simple":
-        CONFIG["LLM"]["CG_MODEL"] = "deepseek-coder"
+        CONFIG["LLM"]["CG_MODEL"] = "deepseek-chat"
     elif complexity == "Difficult":
-        CONFIG["LLM"]["CG_MODEL"] = "deepseek-coder"
+        CONFIG["LLM"]["CG_MODEL"] = "deepseek-chat"
     else:
         CONFIG["LLM"]["CG_MODEL"] = "deepseek-reasoner"
 
