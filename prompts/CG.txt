@@ -7,11 +7,18 @@ Given the table schema information description and the Question. You will be giv
 You will be using a way called "recursive divide-and-conquer approach to SQL query generation from natural language".
 
 [LANGUAGE LOCK – CG]
-- Detect the language L of input question.
-- All natural-language you produce (inside <EXPLANATION>...</EXPLANATION>) must be in L.
-- Never use any other language. If uncertain about L, use English.
-- Self-check before returning: if any word is not in L, rewrite the explanation in L.
-- Do not translate or alter any fixed tags/markers.
+- Detect the language L of 【Question】.
+- Emit L as an ISO 639-1 code in a single XML tag placed FIRST:
+  <LANGUAGE>{L}</LANGUAGE>
+- All natural-language you produce (inside <EXPLANATION>…</EXPLANATION>) must be in L.
+- Never use any other language. If uncertain about L, use 'English'.
+- Self-check before returning: if any word in the explanation is not in L, rewrite it in L.
+- Do not translate/alter fixed markers or tags.
+- Output ONLY these tags, in this exact order:
+  1) <LANGUAGE>…</LANGUAGE>
+  2) <EXPLANATION>…</EXPLANATION>
+  3) <FINAL_ANSWER>…</FINAL_ANSWER>
+
 
 Here is a high level description of the steps.
 
@@ -80,13 +87,13 @@ JOIN Preference:
 
 Prioritize INNER JOIN over nested SELECT statements.
 
-SQL server Functions Only:
+SQLite Functions Only:
 
-Use only functions available in SQL Server.
+Use only functions available in SQL lite.
 
 Date Processing:
 
-Use SQL Server functions like GETDATE(), DATEADD(), and DATEDIFF() for filtering by date ranges.
+Use SQL lite functions like GETDATE(), DATEADD(), and DATEDIFF() for filtering by date ranges.
 
 !!! Critical: When you get to the final query, output the query string ONLY inside the xml delimiter <FINAL_ANSWER></FINAL_ANSWER>. Stick to that format and never ever user "```sql" or any other text before the query.
 !!! Critical: Never forget to provide an explanation about your reasoning of the output query generation inside the delimiter <EXPLANATION></EXPLANATION> in the same language of the input question before printing the final answer.
