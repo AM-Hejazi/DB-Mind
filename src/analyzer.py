@@ -50,15 +50,21 @@ def analyze_failure(
 
     llm = LLMClient()
     start_time = time.time()
+    
+    # DeepSeek reasoner models only support temperature=1.0 (default)
+    model_name = CONFIG["LLM"].get("AN_MODEL")
+    call_params = {
+        "model": model_name,
+        "messages": [
+            {"role": "system", "content": "You are a strict schema-aware assistant for fixing SQL-queries."},
+            {"role": "user", "content": full_prompt}
+        ]
+    }
+    if "reasoner" not in model_name.lower():
+        call_params["temperature"] = 0.0
+    
     try:
-        response = llm.client.chat.completions.create(
-            model=CONFIG["LLM"].get("AN_MODEL"),
-            messages=[
-                {"role": "system", "content": "You are a strict schema-aware assistant for fixing SQL-queries."},
-                {"role": "user", "content": full_prompt}
-            ],
-            temperature=0.0
-        )
+        response = llm.client.chat.completions.create(**call_params)
     except Exception  as e:
         logger.log("Analyzer LLM Call Failed", str(e))
         return None
