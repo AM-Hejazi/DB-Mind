@@ -1,14 +1,11 @@
 import os
-from openai import OpenAI
-from dotenv import load_dotenv
 import time
+from dotenv import load_dotenv
 from src.logger import global_logger as logger
 from config import CONFIG
+from src.llm_client import LLMClient
 
 load_dotenv()
-api_key = os.getenv("DEEPSEEK_API_KEY")
-
-client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
 def load_prompt_template():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,24 +25,25 @@ def build_prompt(Original_Q_For_FA_Prompt, Finalized_q, sql_query, user_feedback
     )
 
 
-def generate_updated_question(Original_Q_For_FA_Prompt, Finalized_q, sql_query, user_feedback): # Update signature
-    prompt = build_prompt(Original_Q_For_FA_Prompt, Finalized_q, sql_query, user_feedback) # Update call
+def generate_updated_question(Original_Q_For_FA_Prompt, Finalized_q, sql_query, user_feedback, provider: str | None = None):
+    prompt = build_prompt(Original_Q_For_FA_Prompt, Finalized_q, sql_query, user_feedback)
 
     logger.log("FA Prompt", prompt)
     model_name = CONFIG["LLM"]["FA_MODEL"]
     start_time = time.time()
-    response = client.chat.completions.create(
-        model=model_name,
+    llm = LLMClient(model_name=model_name, provider=provider)
+    response = llm.chat(
         messages=[
             {"role": "system",
              "content": "You are a feedback-aware assistant who updates user queries based on SQL outputs and user corrections."},
             {"role": "user", "content": prompt}
         ],
-        temperature=0.1
+        temperature=0.1,
     )
     duration = round(time.time() - start_time, 2)
 
-    logger.log("FA Model", "deepseek-chat")
+    logger.log("FA Model", llm.model_name)
+    logger.log("FA Provider", llm.client_type)
     logger.log("FA Response Time", f"{duration} seconds")
     content = response.choices[0].message.content.strip()
 

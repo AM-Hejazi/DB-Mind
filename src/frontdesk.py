@@ -1,16 +1,13 @@
 # === frontdesk.py ===
 import os
-from openai import OpenAI
-from dotenv import load_dotenv
 import time
+from dotenv import load_dotenv
 from src.logger import global_logger as logger
 from src.retrieval import load_schema_text
 from src.validator import validate_sql
-
+from src.llm_client import LLMClient
 
 load_dotenv()
-api_key = os.getenv("DEEPSEEK_API_KEY")
-client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
 def load_fd_prompt_template():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +30,7 @@ def build_prompt(schema_block, sample_values_block, chat_history_str):
             )
 
 
-def fd_chat_step(chat_history, user_input, schema_block, sample_values_block):
+def fd_chat_step(chat_history, user_input, schema_block, sample_values_block, provider: str | None = None):
     """
     Runs a single turn of the frontdesk conversation.
     Returns:
@@ -58,10 +55,10 @@ def fd_chat_step(chat_history, user_input, schema_block, sample_values_block):
                 .replace("{HISTORY}", history_str)
     )
 
-    response = client.chat.completions.create(
-        model="deepseek-chat",
+    llm = LLMClient(model_name="deepseek-chat", provider=provider)
+    response = llm.chat(
         messages=[{"role": "system", "content": prompt}],
-        temperature=0.2
+        temperature=0.2,
     )
 
     reply = response.choices[0].message.content.strip()
@@ -123,11 +120,11 @@ def fd_feedback(chat_history, final_question, sql_query, result_rows, selected_s
                             .replace("{chat_history_text}", history_str.strip())
 
     try:
-        response = client.chat.completions.create(
-            model="deepseek-coder",
-            messages=[{"role": "system", "content": system_prompt}],
-            temperature=0.2
-        )
+            llm = LLMClient(model_name="deepseek-coder", provider=provider)
+            response = llm.chat(
+                messages=[{"role": "system", "content": system_prompt}],
+                temperature=0.2,
+            )
         reply = response.choices[0].message.content.strip()
 
         # Default to full reply in UI unless rating is detected later

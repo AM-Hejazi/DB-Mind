@@ -277,7 +277,7 @@ def process_next_step(history, session_state):
             session_state, feedback_buttons_row=False, log_file=False)
         yield history, feedback_buttons_row_u, log_u, gr.update(visible=False), rating_u, feedback_u, submit_u, gr.update(visible=False), session_state
 
-        schema_result = retrieve_schema_with_llm(session_state["original_q"])
+        schema_result = retrieve_schema_with_llm(session_state["original_q"], provider=session_state.get("model_choice"))
         session_state["schema_result"] = schema_result
         logger.log("Schema Reasoning Explanation", schema_result["explanation"])
         logger.log("Selected Schema Context", schema_result["selected_schema"])
@@ -291,7 +291,7 @@ def process_next_step(history, session_state):
             session_state, feedback_buttons_row=False, log_file=False)
         yield history, feedback_buttons_row_u, log_u, gr.update(visible=False), rating_u, feedback_u, submit_u, gr.update(visible=False), session_state
 
-        qc_response, is_clear = clarify_question(session_state["original_q"], schema_result["selected_schema"])
+        qc_response, is_clear = clarify_question(session_state["original_q"], schema_result["selected_schema"], provider=session_state.get("model_choice"))
         qc_text = qc_response.split("【IS_CLEAR】")[0].strip()
         session_state["qc_feedback"] = qc_text
         session_state["is_clear"] = is_clear
@@ -414,7 +414,8 @@ def process_next_step(history, session_state):
             final_q, complexity = finalize_question(
                 original_q=session_state["original_q"],
                 feedback=session_state["qc_feedback"],
-                user_rewrite=session_state["user_rewrite"]
+                user_rewrite=session_state["user_rewrite"],
+                provider=session_state.get("model_choice")
             )
             session_state["final_q"] = final_q
             session_state["complexity"] = complexity
@@ -625,7 +626,8 @@ def process_feedback(history, session_state):
         Finalized_q=session_state["final_q"],
         sql_query=session_state["sql_query"],
         result_preview=session_state["final_result"],
-        user_feedback=feedback_text
+        user_feedback=feedback_text,
+        provider=session_state.get("model_choice")
     )
     session_state["original_q"] = updated_question
     session_state["final_q"] = updated_question
@@ -641,7 +643,7 @@ def process_feedback(history, session_state):
     yield make_updates(history, session_state)
 
     # --- Re-run the pipeline ---
-    schema_result = retrieve_schema_with_llm(updated_question)
+    schema_result = retrieve_schema_with_llm(updated_question, provider=session_state.get("model_choice"))
     session_state["schema_result"] = schema_result
 
     history.append({"role": "assistant", "content": "⚙️ Generating SQL..."})

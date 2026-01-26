@@ -1,13 +1,11 @@
 import os
-from openai import OpenAI
-from dotenv import load_dotenv
 import time
+from dotenv import load_dotenv
 from src.logger import global_logger as logger
 from config import CONFIG
+from src.llm_client import LLMClient
 
 load_dotenv()
-api_key = os.getenv("DEEPSEEK_API_KEY")
-client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
 def load_prompt_template():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,21 +17,22 @@ def build_prompt(user_question, schema_context):
     template = load_prompt_template()
     return template.replace("{QUESTION}", user_question).replace("{DATABASE_SCHEMA}", schema_context or "No schema available.")
 
-def clarify_question(user_question, schema_context=None):
+def clarify_question(user_question, schema_context=None, provider: str | None = None):
     full_prompt = build_prompt(user_question, schema_context)
 
     start_time = time.time()
-    response = client.chat.completions.create(
-        model=CONFIG["LLM"]["QC_MODEL"],
+    llm = LLMClient(model_name=CONFIG["LLM"]["QC_MODEL"], provider=provider)
+    response = llm.chat(
         messages=[
             {"role": "system", "content": "You are a strict schema-aware assistant for clarifying SQL-related questions."},
             {"role": "user", "content": full_prompt}
         ],
-        temperature=0.3
+        temperature=0.3,
     )
     end_time = time.time()
     duration = round(end_time - start_time, 2)
-    logger.log("QC Model", "deepseek-chat")
+    logger.log("QC Model", llm.model_name)
+    logger.log("QC Provider", llm.client_type)
     logger.log("QC Response Time", f"{duration} seconds")
 
     full_text = response.choices[0].message.content.strip()

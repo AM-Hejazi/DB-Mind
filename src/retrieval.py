@@ -4,15 +4,12 @@ import json
 import time
 from pathlib import Path
 from typing import Dict, List
-from openai import OpenAI
 from dotenv import load_dotenv
 from src.logger import global_logger as logger
 from config import CONFIG
 from src.llm_client import LLMClient
 
 load_dotenv()
-api_key = os.getenv("DEEPSEEK_API_KEY")
-client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
 
 def _ensure_path(path_str: str) -> Path:
@@ -140,12 +137,12 @@ def build_prompt(user_question, schema_text):
     template = load_prompt_template()
     return template.replace("{QUESTION}", user_question).replace("{SCHEMA}", schema_text)
 
-def retrieve_schema_with_llm(user_question):
+def retrieve_schema_with_llm(user_question, provider: str | None = None):
     schema_text = load_schema_text()
     prompt = build_prompt(user_question, schema_text)
 
     start_time = time.time()
-    sr_llm = LLMClient(CONFIG["LLM"]["SR_MODEL"])
+    sr_llm = LLMClient(CONFIG["LLM"]["SR_MODEL"], provider=provider)
     response = sr_llm.chat(
         messages=[
             {"role": "system", "content": "You are a SQL schema selector assistant."},

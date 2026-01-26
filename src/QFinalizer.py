@@ -1,13 +1,11 @@
 import os
-from openai import OpenAI
-from dotenv import load_dotenv
 import time
+from dotenv import load_dotenv
 from src.logger import global_logger as logger
 from config import CONFIG
+from src.llm_client import LLMClient
 
 load_dotenv()
-api_key = os.getenv("DEEPSEEK_API_KEY")
-client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
 def load_prompt_template():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,21 +20,22 @@ def build_prompt(original_q, feedback, user_rewrite):
             .replace("{FEEDBACK}", feedback)
             .replace("{USER_REWRITE}", user_rewrite))
 
-def finalize_question(original_q, feedback, user_rewrite) -> (str, str):
+def finalize_question(original_q, feedback, user_rewrite, provider: str | None = None) -> (str, str):
     prompt = build_prompt(original_q, feedback, user_rewrite)
 
     start_time = time.time()
-    response = client.chat.completions.create(
-        model=CONFIG["LLM"]["QF_MODEL"],
+    llm = LLMClient(model_name=CONFIG["LLM"]["QF_MODEL"], provider=provider)
+    response = llm.chat(
         messages=[
             {"role": "system", "content": "You are a clarification finalizer for SQL question rephrasing."},
             {"role": "user", "content": prompt}
         ],
-        temperature=0.3
+        temperature=0.3,
     )
     end_time = time.time()
     duration = round(end_time - start_time, 2)
-    logger.log("QF Model", "deepseek-chat")
+    logger.log("QF Model", llm.model_name)
+    logger.log("QF Provider", llm.client_type)
     logger.log("QF Response Time", f"{duration} seconds")
 
     content = response.choices[0].message.content.strip()
