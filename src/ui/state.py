@@ -34,4 +34,6 @@ def default_session_state():
         "question_started": False,
         "limit_reached": False,
         "skip_pipeline": False,
+        # Selected LLM provider for this session: "deepseek" or "openai"
+        "model_choice": "deepseek",
     })

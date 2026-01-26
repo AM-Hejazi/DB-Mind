@@ -149,6 +149,25 @@ def create_ui():
             """)
 
         # --- Corrected Controls Layout ---
+        # Top-right model selector: user can choose Deepseek or OpenAI
+        def _set_model_choice(choice, state_dict):
+            try:
+                if isinstance(state_dict, dict):
+                    state_dict["model_choice"] = choice.lower()
+                else:
+                    state_dict.update({"model_choice": choice.lower()})
+            except Exception:
+                state_dict = {"model_choice": choice.lower()}
+            return state_dict
+
+        with gr.Row(visible=True) as top_row:
+            with gr.Column(scale=1):
+                gr.HTML("")
+            with gr.Column(scale=0):
+                model_dropdown = gr.Dropdown(choices=["Deepseek", "OpenAI"], value="Deepseek", label="Model Provider", elem_id="model-dropdown")
+                # update session_state when selection changes
+                model_dropdown.change(fn=_set_model_choice, inputs=[model_dropdown, session_state], outputs=[session_state])
+
         with gr.Column(elem_id="controls-container", scale=0) as controls_container:
             # Row for star rating
             with gr.Row(visible=False) as feedback_rating_row:
@@ -180,6 +199,7 @@ def create_ui():
             "log_file": log_file,
             "reset_btn": reset_btn,
             "footer_row": footer_row,
+            "model_dropdown": model_dropdown,
         }
 
         bind_event_handlers(elements, session_state)
