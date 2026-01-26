@@ -6,32 +6,117 @@ from src.ui.events import bind_event_handlers
 
 def create_ui():
     with gr.Blocks(theme=gr.themes.Default(), css="""
+    /* Make the page fixed height with no page scrolling */
     html, body {
         height: 100%;
+        margin: 0;
+        padding: 0;
         overflow: hidden;
     }
+    
     .gradio-container {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
     }
-    #chatbot {
-        flex: 1 1 auto;
-        overflow-y: hidden !important;
-        min-height: 65vh;
+    
+    /* Header area with title and model dropdown */
+    #header-row {
+        flex: 0 0 auto;
+        margin-bottom: 8px;
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    #logo-img {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+    }
+    
+    #logo-img img {
+        object-fit: contain;
+        border-radius: 4px;
+    }
+    
+    #model-selector-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+    }
+    
+    #model-selector-container label {
+        margin: 0;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+    
+    /* Main content area - takes remaining space */
+    #main-content-row {
+        flex: 1 1 auto;
+        display: flex !important;
+        min-height: 0;
+        overflow: hidden;
+    }
+    
+    /* Chatbot container - fixed height with internal scroll */
+    #chatbot-column {
+        flex: 1 1 auto;
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 0;
+    }
+    
+    #chatbot {
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+        max-height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
     }
     
     #chatbot .wrap {
+        flex: 1 1 auto !important;
         overflow-y: auto !important;
-        flex: 1;
+        overflow-x: hidden !important;
+        min-height: 0 !important;
     }
-
+    
+    #model-dropdown {
+        min-width: 150px;
+    }
+    
+    /* Controls container - fixed at bottom */
     #controls-container {
-        min-height: 180px;
-        overflow-y: auto; 
+        flex: 0 0 auto;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid #444;
+        max-height: 160px;
+    }
+    
+    #inputrow {
+        margin-bottom: 6px;
+    }
+    
+    #inputrow input {
+        font-size: 14px;
+    }
+    
+    /* Make footer controls inline */
+    .footer-controls {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
     }
     """) as demo:
         session_state = default_session_state()
@@ -98,15 +183,33 @@ def create_ui():
             "</div>"
         )
 
-        chatbot = gr.Chatbot(
-            value=[{"role": "assistant", "content": welcome_message}], #
-            elem_id="chatbot",
-            label="DB-Mind 1.2-b",
-            show_copy_button=True,
-            avatar_images=(None, "data/icon.png"),
-            type='messages',  # <-- Add this line back
-            bubble_full_width=False
-        )
+        # --- Header Row with Title and Model Selector ---
+        with gr.Row(elem_id="header-row") as header_row:
+            with gr.Column(scale=0, min_width=50):
+                gr.Image("data/icon.png", height=32, width=32, show_label=False, show_download_button=False, container=False, elem_id="logo-img")
+            with gr.Column(scale=4):
+                gr.HTML("<h2 style='margin: 0; padding: 0; line-height: 32px;'>DB-Mind 1.2-b</h2>")
+            with gr.Column(elem_id="model-selector-container", scale=0, min_width=180):
+                model_dropdown = gr.Dropdown(
+                    choices=["Deepseek", "OpenAI"], 
+                    value="Deepseek", 
+                    label="",
+                    container=False,
+                    elem_id="model-dropdown"
+                )
+        
+        # --- Main Content: Chatbot ---
+        with gr.Row(elem_id="main-content-row") as main_content:
+            with gr.Column(elem_id="chatbot-column"):
+                chatbot = gr.Chatbot(
+                    value=[{"role": "assistant", "content": welcome_message}],
+                    elem_id="chatbot",
+                    label="Chatbot",
+                    show_copy_button=True,
+                    avatar_images=(None, "data/icon.png"),
+                    type='messages',
+                    bubble_full_width=False
+                )
 
         # Auto-scroll script remains the same
         gr.HTML("""
@@ -148,8 +251,7 @@ def create_ui():
             </script>
             """)
 
-        # --- Corrected Controls Layout ---
-        # Top-right model selector: user can choose Deepseek or OpenAI
+        # --- Model dropdown event handler ---
         def _set_model_choice(choice, state_dict):
             from config import set_models_for_provider
             try:
@@ -162,16 +264,15 @@ def create_ui():
             # Update CONFIG models based on the selected provider
             set_models_for_provider(choice)
             return state_dict
+        
+        model_dropdown.change(
+            fn=_set_model_choice, 
+            inputs=[model_dropdown, session_state], 
+            outputs=[session_state]
+        )
 
-        with gr.Row(visible=True) as top_row:
-            with gr.Column(scale=1):
-                gr.HTML("")
-            with gr.Column(scale=0):
-                model_dropdown = gr.Dropdown(choices=["Deepseek", "OpenAI"], value="Deepseek", label="Model Provider", elem_id="model-dropdown")
-                # update session_state when selection changes
-                model_dropdown.change(fn=_set_model_choice, inputs=[model_dropdown, session_state], outputs=[session_state])
-
-        with gr.Column(elem_id="controls-container", scale=0) as controls_container:
+        # --- Controls Container (Fixed at Bottom) ---
+        with gr.Column(elem_id="controls-container") as controls_container:
             # Row for star rating
             with gr.Row(visible=False) as feedback_rating_row:
                 feedback_rating = gr.Radio(
@@ -183,13 +284,22 @@ def create_ui():
             # Row for the main user input
             with gr.Row(elem_id="inputrow") as inputrow:
                 user_input = gr.Textbox(
-                    placeholder="Type your question here...", container=False, scale=9, autofocus=True)
-                send_btn = gr.Button("Send", scale=1)
+                    placeholder="Type your question here...", 
+                    container=False, 
+                    scale=9, 
+                    autofocus=True
+                )
+                send_btn = gr.Button("Send", scale=1, variant="primary")
 
-            # Column for footer controls (log file and reset button)
-            with gr.Column(elem_classes="footer-controls") as footer_row:
-                log_file = gr.File(label="📁 Download Final Answer Log", visible=False, file_count="single")
-                reset_btn = gr.Button("🔄 New Question")
+            # Row for footer controls (log file and reset button) - side by side
+            with gr.Row(elem_classes="footer-controls") as footer_row:
+                log_file = gr.File(
+                    label="📁 Download Log", 
+                    visible=False, 
+                    file_count="single",
+                    scale=3
+                )
+                reset_btn = gr.Button("🔄 New Question", scale=1, size="sm")
 
         # --- Dictionary of Elements ---
         elements = {
