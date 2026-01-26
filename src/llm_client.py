@@ -38,14 +38,22 @@ class LLMClient:
             self.client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
     def chat(self, messages, temperature=0.2):
-        # OpenAI gpt-4o models only support temperature=1 (default)
-        # Deepseek models support custom temperature values
-        if self.client_type == "openai":
-            # For OpenAI models, don't pass temperature parameter
-            # They will use their default temperature
+        # OpenAI reasoning models (o1, o3, o4 series) do not support temperature parameter
+        # They use a fixed temperature and will error if temperature is provided
+        is_reasoning_model = any(self.model_name.startswith(prefix) for prefix in ["o1", "o3", "o4"])
+        
+        if self.client_type == "openai" and is_reasoning_model:
+            # For OpenAI reasoning models, don't pass temperature parameter at all
             return self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
+            )
+        elif self.client_type == "openai":
+            # For other OpenAI models (gpt-4, gpt-4o, etc.), use default or temperature=1
+            return self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                temperature=1.0,
             )
         else:
             # For Deepseek models, use custom temperature
