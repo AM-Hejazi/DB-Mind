@@ -83,12 +83,12 @@ DEEPSEEK_MODELS = {
 
 # OpenAI: Uses latest models (gpt-4o for balanced, o1 for reasoning, gpt-4o-mini for fast tasks)
 OPENAI_MODELS = {
-    "CG_MODEL": "gpt-4o",                     # Clarifier: needs reasoning for question understanding
-    "SR_MODEL": "gpt-4o-mini",                # Schema Retrieval: fast schema selection, lightweight
-    "AN_MODEL": "gpt-4o",                     # Analyzer: needs reasoning for failure analysis
-    "FA_MODEL": "gpt-4o",                     # Feedback/FrontDesk: needs reasoning to follow clarification/confirmation instructions
-    "TR_MODEL": "gpt-4o-mini",                # Translator: fast SQL translation, lightweight
-    "EV_MODEL": "gpt-4o",                     # Evaluator: needs reasoning for evaluation
+    "CG_MODEL": "gpt-5",                     # Clarifier: needs reasoning for question understanding
+    "SR_MODEL": "gpt-5-mini",                # Schema Retrieval: fast schema selection, lightweight
+    "AN_MODEL": "gpt-5",                     # Analyzer: needs reasoning for failure analysis
+    "FA_MODEL": "gpt-5",                     # Feedback/FrontDesk: needs reasoning to follow clarification/confirmation instructions
+    "TR_MODEL": "gpt-5-mini",                # Translator: fast SQL translation, lightweight
+    "EV_MODEL": "gpt-5",                     # Evaluator: needs reasoning for evaluation
 }
 
 CONFIG = {
