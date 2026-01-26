@@ -74,7 +74,7 @@ def fd_chat_step(chat_history, user_input, schema_block, sample_values_block, pr
     return reply, clarified, chat_history
 
 
-def fd_feedback(chat_history, final_question, sql_query, result_rows, selected_schema):
+def fd_feedback(chat_history, final_question, sql_query, result_rows, selected_schema, provider: str | None = None):
     """
     Runs a single feedback turn.
     Returns:
@@ -120,11 +120,12 @@ def fd_feedback(chat_history, final_question, sql_query, result_rows, selected_s
                             .replace("{chat_history_text}", history_str.strip())
 
     try:
-            llm = LLMClient(model_name="deepseek-coder", provider=provider)
-            response = llm.chat(
-                messages=[{"role": "system", "content": system_prompt}],
-                temperature=0.2,
-            )
+        llm = LLMClient(model_name="deepseek-coder", provider=provider)
+        response = llm.chat(
+            messages=[{"role": "system", "content": system_prompt}],
+            temperature=0.2,
+        )
+
         reply = response.choices[0].message.content.strip()
 
         # Default to full reply in UI unless rating is detected later

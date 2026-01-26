@@ -1,4 +1,3 @@
-# === handlers.py ===
 import os, re
 import glob
 from datetime import datetime
@@ -220,13 +219,13 @@ def process_next_step(history, session_state):
                                                       inputrow=True)
 
         user_input = history[-1]["content"]
-            reply, clarified, updated = fd_chat_step(
-                session_state.get("fd_history", []),
-                user_input,
-                load_schema_text(),
-                "No values available",
-                provider=session_state.get("model_choice")
-            )
+        reply, clarified, updated = fd_chat_step(
+            session_state.get("fd_history", []),
+            user_input,
+            load_schema_text(),
+            "No values available",
+            provider=session_state.get("model_choice"),
+        )
         session_state["fd_history"] = updated
         logger.log("FD/User", user_input)
         logger.log("FD/Response", reply)
@@ -389,14 +388,15 @@ def process_next_step(history, session_state):
         rows = session_state.get("raw_result_rows", []) or []
 
         try:
-                reply, rating_start, fd_chat = fd_feedback(
-                    chat_history=fd_chat,
-                    final_question=session_state.get("final_q", ""),
-                    sql_query=session_state.get("sql_query", ""),
-                    result_rows=rows,
-                    selected_schema=session_state.get("schema_result", {}).get("selected", {}),
-                    provider=session_state.get("model_choice")
-                )
+            reply, rating_start, fd_chat = fd_feedback(
+                chat_history=fd_chat,
+                final_question=session_state.get("final_q", ""),
+                sql_query=session_state.get("sql_query", ""),
+                result_rows=rows,
+                selected_schema=session_state.get("schema_result", {}).get("selected", {}),
+                provider=session_state.get("model_choice"),
+            )
+
             # If feedback finished, show log file
             show_log = "<Rating>" in reply
 
