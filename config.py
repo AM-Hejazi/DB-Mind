@@ -71,22 +71,24 @@ else:
 
 
 # Model configurations for each provider
+# Deepseek: Uses specialized models for reasoning tasks vs fast/accurate tasks
 DEEPSEEK_MODELS = {
-    "CG_MODEL": "deepseek_reasoner",
-    "SR_MODEL": "deepseek-chat",
-    "AN_MODEL": "deepseek-reasoner",
-    "FA_MODEL": "deepseek-chat",
-    "TR_MODEL": "deepseek-chat",
-    "EV_MODEL": "deepseek_reasoner",
+    "CG_MODEL": "deepseek-reasoner",          # Clarifier: needs reasoning for question understanding
+    "SR_MODEL": "deepseek-chat",              # Schema Retrieval: fast schema selection
+    "AN_MODEL": "deepseek-reasoner",          # Analyzer: needs reasoning for failure analysis
+    "FA_MODEL": "deepseek-chat",              # Feedback: fast feedback generation
+    "TR_MODEL": "deepseek-chat",              # Translator: fast SQL translation
+    "EV_MODEL": "deepseek-reasoner",          # Evaluator: needs reasoning for evaluation
 }
 
+# OpenAI: Uses latest models (gpt-4o for balanced, o1 for reasoning, gpt-4o-mini for fast tasks)
 OPENAI_MODELS = {
-    "CG_MODEL": "gpt-4",
-    "SR_MODEL": "gpt-4",
-    "AN_MODEL": "gpt-4",
-    "FA_MODEL": "gpt-4",
-    "TR_MODEL": "gpt-4",
-    "EV_MODEL": "gpt-4",
+    "CG_MODEL": "gpt-4o",                     # Clarifier: needs reasoning for question understanding
+    "SR_MODEL": "gpt-4o-mini",                # Schema Retrieval: fast schema selection, lightweight
+    "AN_MODEL": "gpt-4o",                     # Analyzer: needs reasoning for failure analysis
+    "FA_MODEL": "gpt-4o-mini",                # Feedback: fast feedback generation, lightweight
+    "TR_MODEL": "gpt-4o-mini",                # Translator: fast SQL translation, lightweight
+    "EV_MODEL": "gpt-4o",                     # Evaluator: needs reasoning for evaluation
 }
 
 CONFIG = {
