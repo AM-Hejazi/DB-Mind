@@ -76,7 +76,7 @@ DEEPSEEK_MODELS = {
     "CG_MODEL": "deepseek-reasoner",          # Clarifier: needs reasoning for question understanding
     "SR_MODEL": "deepseek-chat",              # Schema Retrieval: fast schema selection
     "AN_MODEL": "deepseek-reasoner",          # Analyzer: needs reasoning for failure analysis
-    "FA_MODEL": "deepseek-chat",              # Feedback: fast feedback generation
+    "FA_MODEL": "deepseek-reasoner",          # Feedback/FrontDesk: needs reasoning to follow clarification/confirmation instructions
     "TR_MODEL": "deepseek-chat",              # Translator: fast SQL translation
     "EV_MODEL": "deepseek-reasoner",          # Evaluator: needs reasoning for evaluation
 }
@@ -86,7 +86,7 @@ OPENAI_MODELS = {
     "CG_MODEL": "gpt-4o",                     # Clarifier: needs reasoning for question understanding
     "SR_MODEL": "gpt-4o-mini",                # Schema Retrieval: fast schema selection, lightweight
     "AN_MODEL": "gpt-4o",                     # Analyzer: needs reasoning for failure analysis
-    "FA_MODEL": "gpt-4o-mini",                # Feedback: fast feedback generation, lightweight
+    "FA_MODEL": "gpt-4o",                     # Feedback/FrontDesk: needs reasoning to follow clarification/confirmation instructions
     "TR_MODEL": "gpt-4o-mini",                # Translator: fast SQL translation, lightweight
     "EV_MODEL": "gpt-4o",                     # Evaluator: needs reasoning for evaluation
 }
