@@ -242,6 +242,20 @@ def process_next_step(history, session_state):
 
         yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
                                              inputrow=True)
+        
+        # If clarification was not complete, stop here and wait for user response
+        if not clarified:
+            return
+    
+    # If we reach here and final_q is set, skip to schema retriever phase
+    # by adding the "Schema Retriever running" marker if not already there
+    if session_state.get("final_q") and "Schema Retriever running" not in history[-1]["content"]:
+        history.append({
+            "role": "assistant",
+            "content": f"✅ Your question: *{session_state['final_q']}*\n\n🗂️ Schema Retriever running..."
+        })
+        yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
+                                             inputrow=True)
 
     # === Schema Retriever ===
     if "Schema Retriever running" in history[-1]["content"]:
