@@ -6,20 +6,18 @@ from src.ui.events import bind_event_handlers
 
 def create_ui():
     with gr.Blocks(theme=gr.themes.Default(), css="""
-    /* Make the page fixed height with no page scrolling */
+    /* Allow page scrolling for small screens */
     html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: auto;
     }
     
     .gradio-container {
-        height: 100vh !important;
-        max-height: 100vh !important;
+        min-height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
-        overflow: hidden !important;
         padding: 16px !important;
         box-sizing: border-box !important;
     }
@@ -62,7 +60,8 @@ def create_ui():
     #main-content-row {
         flex: 1 1 auto;
         display: flex !important;
-        min-height: 0;
+        min-height: 400px;
+        max-height: 70vh;
         overflow: hidden;
     }
     
@@ -71,12 +70,12 @@ def create_ui():
         flex: 1 1 auto;
         display: flex !important;
         flex-direction: column !important;
-        min-height: 0;
+        min-height: 400px;
     }
     
     #chatbot {
         flex: 1 1 auto !important;
-        min-height: 0 !important;
+        min-height: 400px !important;
         max-height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
