@@ -70,6 +70,25 @@ else:
     default_dialect = "sqlserver"
 
 
+# Model configurations for each provider
+DEEPSEEK_MODELS = {
+    "CG_MODEL": "deepseek_reasoner",
+    "SR_MODEL": "deepseek-chat",
+    "AN_MODEL": "deepseek-reasoner",
+    "FA_MODEL": "deepseek-chat",
+    "TR_MODEL": "deepseek-chat",
+    "EV_MODEL": "deepseek_reasoner",
+}
+
+OPENAI_MODELS = {
+    "CG_MODEL": "gpt-4",
+    "SR_MODEL": "gpt-4",
+    "AN_MODEL": "gpt-4",
+    "FA_MODEL": "gpt-4",
+    "TR_MODEL": "gpt-4",
+    "EV_MODEL": "gpt-4",
+}
+
 CONFIG = {
     "LLM": {
         "CG_MODEL": "deepseek_reasoner",
@@ -96,3 +115,11 @@ CONFIG = {
         "USE_GPT_FALLBACK_FOR_CG": True
     }
 }
+
+def set_models_for_provider(provider: str) -> None:
+    """Update CONFIG models based on the selected provider (OpenAI or Deepseek)."""
+    if provider == "OpenAI":
+        CONFIG["LLM"].update(OPENAI_MODELS)
+    elif provider == "Deepseek":
+        CONFIG["LLM"].update(DEEPSEEK_MODELS)
+    # If provider is invalid or None, keep existing models

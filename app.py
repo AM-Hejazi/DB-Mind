@@ -1,6 +1,10 @@
 import os
 import gradio as gr
 from src.ui.layout import create_ui
+from config import set_models_for_provider
+
+# Initialize with default provider (Deepseek)
+set_models_for_provider("Deepseek")
 
 
 def build_demo():

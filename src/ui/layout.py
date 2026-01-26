@@ -151,6 +151,7 @@ def create_ui():
         # --- Corrected Controls Layout ---
         # Top-right model selector: user can choose Deepseek or OpenAI
         def _set_model_choice(choice, state_dict):
+            from config import set_models_for_provider
             try:
                 if isinstance(state_dict, dict):
                     state_dict["model_choice"] = choice.lower()
@@ -158,6 +159,8 @@ def create_ui():
                     state_dict.update({"model_choice": choice.lower()})
             except Exception:
                 state_dict = {"model_choice": choice.lower()}
+            # Update CONFIG models based on the selected provider
+            set_models_for_provider(choice)
             return state_dict
 
         with gr.Row(visible=True) as top_row:
