@@ -218,30 +218,57 @@ def process_next_step(history, session_state):
             return "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
                                                       inputrow=True)
 
-        user_input = history[-1]["content"]
-        reply, clarified, updated = fd_chat_step(
-            session_state.get("fd_history", []),
-            user_input,
-            load_schema_text(),
-            "No values available",
-            provider=session_state.get("model_choice"),
-        )
-        session_state["fd_history"] = updated
-        logger.log("FD/User", user_input)
-        logger.log("FD/Response", reply)
-
-        if clarified:
-            session_state["final_q"] = clarified
-            logger.log("Final Reformulated Question", clarified)
+        user_input = history[-1]["content"].lower().strip()
+        
+        # Detect confirmation keywords - if user confirms, extract the question from fd_history
+        confirmation_keywords = ["yes", "go ahead", "start", "confirm", "ya", "si", "ja", "ok", "okay", "please start", "run", "execute", "begin"]
+        is_confirming = any(keyword in user_input for keyword in confirmation_keywords)
+        
+        if is_confirming and session_state.get("pending_clarified_question"):
+            # User confirmed! Use the pending question as final_q
+            session_state["final_q"] = session_state["pending_clarified_question"]
+            logger.log("Final Reformulated Question", session_state["final_q"])
             history.append({
                 "role": "assistant",
-                "content": f"✅ Finalized your question:\n\n> *{clarified}*\n\n🗂️ Schema Retriever running..."
+                "content": f"✅ Finalized your question:\n\n> *{session_state['final_q']}*\n\n🗂️ Schema Retriever running..."
             })
+            yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
+                                                 inputrow=True)
         else:
-            history.append({"role": "assistant", "content": reply})
+            # Continue clarification
+            reply, clarified, updated = fd_chat_step(
+                session_state.get("fd_history", []),
+                history[-1]["content"],
+                load_schema_text(),
+                "No values available",
+                provider=session_state.get("model_choice"),
+            )
+            session_state["fd_history"] = updated
+            logger.log("FD/User", history[-1]["content"])
+            logger.log("FD/Response", reply)
 
-        yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
-                                             inputrow=True)
+            if clarified:
+                # Model provided clarified question
+                session_state["final_q"] = clarified
+                session_state["pending_clarified_question"] = None
+                logger.log("Final Reformulated Question", clarified)
+                history.append({
+                    "role": "assistant",
+                    "content": f"✅ Finalized your question:\n\n> *{clarified}*\n\n🗂️ Schema Retriever running..."
+                })
+            else:
+                # Check if this is a confirmation request (reply contains "Should I start")
+                if "Should I start" in reply or "start the pipeline" in reply.lower():
+                    # Extract the question from the reply for later use
+                    import re
+                    match = re.search(r'this question:\s*["\']?([^"\'?]+)["\']?', reply)
+                    if match:
+                        session_state["pending_clarified_question"] = match.group(1).strip()
+                
+                history.append({"role": "assistant", "content": reply})
+
+            yield "", history, *update_ui_visibility(session_state, log_file=False, feedback_rating=False,
+                                                 inputrow=True)
         
         # If clarification was not complete, stop here and wait for user response
         if not clarified:
