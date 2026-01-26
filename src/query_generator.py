@@ -243,12 +243,8 @@ def format_schema_block(schema_json_subset: Dict) -> str:
 
 def generate_sql_query(final_question: str, selected_schema: Dict | list | str, complexity: str) -> str:
     selected_schema = _coerce_selected(selected_schema)
-    if complexity == "Simple":
-        CONFIG["LLM"]["CG_MODEL"] = "deepseek-chat"
-    elif complexity == "Difficult":
-        CONFIG["LLM"]["CG_MODEL"] = "deepseek-chat"
-    else:
-        CONFIG["LLM"]["CG_MODEL"] = "deepseek-reasoner"
+    # CONFIG["LLM"]["CG_MODEL"] is already set by set_models_for_provider() based on user's selected provider
+    # No need to override it here
 
     selected_tables = selected_schema.get("tables", [])
     selected_columns = selected_schema.get("columns", [])

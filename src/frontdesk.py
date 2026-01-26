@@ -55,7 +55,7 @@ def fd_chat_step(chat_history, user_input, schema_block, sample_values_block, pr
                 .replace("{HISTORY}", history_str)
     )
 
-    llm = LLMClient(model_name="deepseek-chat", provider=provider)
+    llm = LLMClient(model_name=CONFIG["LLM"]["FA_MODEL"], provider=provider)
     response = llm.chat(
         messages=[{"role": "system", "content": prompt}],
         temperature=0.2,
@@ -120,7 +120,7 @@ def fd_feedback(chat_history, final_question, sql_query, result_rows, selected_s
                             .replace("{chat_history_text}", history_str.strip())
 
     try:
-        llm = LLMClient(model_name="deepseek-coder", provider=provider)
+        llm = LLMClient(model_name=CONFIG["LLM"]["FA_MODEL"], provider=provider)
         response = llm.chat(
             messages=[{"role": "system", "content": system_prompt}],
             temperature=0.2,

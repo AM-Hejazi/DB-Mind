@@ -120,8 +120,11 @@ CONFIG = {
 
 def set_models_for_provider(provider: str) -> None:
     """Update CONFIG models based on the selected provider (OpenAI or Deepseek)."""
-    if provider == "OpenAI":
+    if not provider:
+        return
+    provider_lower = provider.lower()
+    if provider_lower == "openai":
         CONFIG["LLM"].update(OPENAI_MODELS)
-    elif provider == "Deepseek":
+    elif provider_lower == "deepseek":
         CONFIG["LLM"].update(DEEPSEEK_MODELS)
     # If provider is invalid or None, keep existing models
