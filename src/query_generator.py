@@ -264,18 +264,13 @@ def generate_sql_query(final_question: str, selected_schema: Dict | list | str, 
         system_content = "You are an expert SQL query generator for SQL Server. Use valid T-SQL syntax."
 
     start_time = time.time()
-    
-    # DeepSeek reasoner models only support temperature=1.0 (default)
-    chat_params = {
-        "messages": [
+    response = llm.chat(
+        messages=[
             {"role": "system", "content": system_content},
             {"role": "user", "content": prompt}
-        ]
-    }
-    if "reasoner" not in llm.model_name.lower():
-        chat_params["temperature"] = 0.0
-    
-    response = llm.chat(**chat_params)
+        ],
+        temperature=0.0
+    )
     duration = round(time.time() - start_time, 2)
 
     logger.log("CG Model", llm.model_name)

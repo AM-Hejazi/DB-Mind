@@ -143,18 +143,13 @@ def retrieve_schema_with_llm(user_question, provider: str | None = None):
 
     start_time = time.time()
     sr_llm = LLMClient(CONFIG["LLM"]["SR_MODEL"], provider=provider)
-    
-    # DeepSeek reasoner models only support temperature=1.0 (default)
-    chat_params = {
-        "messages": [
+    response = sr_llm.chat(
+        messages=[
             {"role": "system", "content": "You are a SQL schema selector assistant."},
             {"role": "user", "content": prompt}
-        ]
-    }
-    if "reasoner" not in sr_llm.model_name.lower():
-        chat_params["temperature"] = 0.0
-    
-    response = sr_llm.chat(**chat_params)
+        ],
+        temperature=0.0
+    )
     duration = round(time.time() - start_time, 2)
     logger.log("SR Model", sr_llm.model_name)
     logger.log("SR Response Time", f"{duration} seconds")
