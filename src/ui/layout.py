@@ -214,54 +214,92 @@ def create_ui():
         # Auto-scroll script - automatically scrolls to bottom on new messages
         gr.HTML("""
             <script>
-            function setupChatboxScroll() {
-                const chatbot = document.getElementById("chatbot");
-                if (!chatbot) { return; }
-
-                const scrollableContainer = chatbot.querySelector('.wrap');
-                if (scrollableContainer) {
-                    console.log("✅ Chatbox auto-scroll enabled");
+            (function() {
+                let scrollContainer = null;
+                let observer = null;
+                
+                function scrollToBottom() {
+                    if (!scrollContainer) return;
+                    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+                }
+                
+                function findAndSetupScroll() {
+                    const chatbot = document.getElementById("chatbot");
+                    if (!chatbot) return false;
                     
-                    const scrollToBottom = () => {
-                        requestAnimationFrame(() => {
-                            scrollableContainer.scrollTop = scrollableContainer.scrollHeight;
-                        });
-                    };
-
-                    // Watch for any changes in the chatbot content
-                    const observer = new MutationObserver(() => {
-                        scrollToBottom();
+                    // Try multiple selectors to find the scrollable container
+                    const selectors = [
+                        '.wrap.svelte-1ed2p3z',
+                        '.wrap',
+                        '.overflow-y-auto',
+                        '.scroll-container',
+                        '[class*="overflow"]'
+                    ];
+                    
+                    for (const selector of selectors) {
+                        const container = chatbot.querySelector(selector);
+                        if (container && container.scrollHeight > container.clientHeight) {
+                            scrollContainer = container;
+                            console.log("✅ Found chatbot scroll container:", selector);
+                            break;
+                        }
+                    }
+                    
+                    // Fallback: use the first scrollable element
+                    if (!scrollContainer) {
+                        const elements = chatbot.querySelectorAll('*');
+                        for (const el of elements) {
+                            if (el.scrollHeight > el.clientHeight) {
+                                scrollContainer = el;
+                                console.log("✅ Found scrollable element via fallback");
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (!scrollContainer) {
+                        console.warn("❌ No scrollable container found");
+                        return false;
+                    }
+                    
+                    // Setup MutationObserver to watch for changes
+                    if (observer) observer.disconnect();
+                    
+                    observer = new MutationObserver(() => {
+                        requestAnimationFrame(scrollToBottom);
                     });
-
-                    // Observe the entire chatbot and all its children
-                    observer.observe(scrollableContainer, { 
-                        childList: true, 
+                    
+                    // Observe the chatbot and all descendants
+                    observer.observe(chatbot, {
+                        childList: true,
                         subtree: true,
-                        characterData: true 
+                        characterData: true,
+                        attributes: false
                     });
-
-                    // Initial scroll
-                    setTimeout(scrollToBottom, 100);
                     
-                    // Also scroll on window resize
-                    window.addEventListener('resize', scrollToBottom);
-                } else {
-                    console.warn("❌ Chatbox scrollable area not found, retrying...");
+                    // Initial scroll
+                    setTimeout(scrollToBottom, 200);
+                    console.log("✅ Auto-scroll enabled");
+                    return true;
                 }
-            }
-
-            // Keep trying until the chatbot is ready
-            let attempts = 0;
-            const intervalId = setInterval(() => {
-                const scrollableContainer = document.querySelector('#chatbot .wrap');
-                if (scrollableContainer) {
-                    setupChatboxScroll();
-                    clearInterval(intervalId);
-                } else if (++attempts > 20) {
-                    clearInterval(intervalId);
-                    console.error("❌ Failed to find chatbox after 10 seconds");
+                
+                // Try to setup immediately
+                if (!findAndSetupScroll()) {
+                    // If not ready, keep trying
+                    let attempts = 0;
+                    const interval = setInterval(() => {
+                        if (findAndSetupScroll() || ++attempts > 20) {
+                            clearInterval(interval);
+                            if (attempts > 20) {
+                                console.error("❌ Failed to setup auto-scroll");
+                            }
+                        }
+                    }, 500);
                 }
-            }, 500);
+                
+                // Re-scroll on window resize
+                window.addEventListener('resize', scrollToBottom);
+            })();
             </script>
             """)
 
