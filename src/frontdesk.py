@@ -2,6 +2,7 @@
 import os
 import time
 from dotenv import load_dotenv
+from config import CONFIG
 from src.logger import global_logger as logger
 from src.retrieval import load_schema_text
 from src.validator import validate_sql
